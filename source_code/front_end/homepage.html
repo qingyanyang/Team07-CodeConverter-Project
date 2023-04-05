@@ -1,0 +1,138 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Converter</title>
+    <style>
+        #form1 {
+            position: relative;
+        }
+
+        input {
+            width: 45%;
+            height: 700px;
+        }
+
+        button {
+            margin-left: 47.5%;
+            color: green;
+        }
+
+        .import,
+        .export {
+            position: absolute;
+        }
+
+        .import {
+            top: 110px;
+            left: 10px;
+        }
+
+        .export {
+            top: 110px;
+            left: 550px;
+        }
+
+        .realImport,
+        .realExport {
+            text-align: center;
+            line-height: 40px;
+            width: 80px;
+            height: 40px;
+            background-color: aqua;
+            border-radius: 10%;
+        }
+
+        #import,
+        #export {
+            visibility: hidden;
+        }
+
+        .option.selected {
+            color: red;
+        }
+
+        h1 {
+            margin-left: 20px;
+            float: left;
+        }
+
+        .lan {
+            width: 100%;
+            height: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+
+        <form action="/upload/list/" method="post" id="form1" enctype="multipart/form-data">
+            {%csrf_token%}
+            <div class='lan' name="lan_selections" onchange="updateSelectedValue()">
+                <h1 class="option" data-value="option1">java</h1>
+                <h1 class="option" data-value="option2">c++</h1>
+            </div>
+
+            <input type="hidden" name="selected_option">
+
+            <label class="import">
+                <div class="realImport">import</div>
+                <input type="file" id='import' name="import">
+            </label>
+
+            <label class="export">
+                <div class="realExport">export</div>
+                <input type="file" id='export' name="export">
+            </label>
+        </form>
+
+        <form action="/codeConverter/" method="post" id="form2">
+            {%csrf_token%}
+            <!-- get input -->
+            <input type="text" class='input' name="input" value="{{check}}">
+            <input type="text" class='output' name="output" value="{{input_lan}}">
+            <button type="submit">convert</button>
+        </form>
+    </div>
+    <script>
+
+        document.getElementById("import").onchange = function () {
+
+            document.getElementById("form1").submit();
+
+            let check = document.getElementsByName('input').value;
+            console.log(check);
+
+            if (check == '1') {
+                alert("invalid suffix!");
+            }
+
+        };
+
+        var titleElements = document.getElementsByClassName("option");
+        for (var i = 0; i < titleElements.length; i++) {
+            titleElements[i].onclick = function () {
+
+                for (var i = 0; i < titleElements.length; i++) {
+                    titleElements[i].style.color = 'black';
+                }
+
+                this.style.color = 'red';
+
+                document.getElementsByName("selected_option").value = this.value;
+            }
+        }
+    </script>
+    <!-- <script>
+    let btnI = document.getElementById("import");
+    let btnE = document.getElementById("export");
+    
+</script> -->
+</body>
+
+</html>
