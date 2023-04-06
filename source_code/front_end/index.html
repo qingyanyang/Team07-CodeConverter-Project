@@ -1,0 +1,80 @@
+<!--{% load static %}-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Converter</title>
+    <link rel="icon" href="imgs/logo_small.png">
+    <link rel="stylesheet" href="css/index.css">
+<body>
+<header>
+    <img src="imgs/logo.png" alt="T7 code converter" class="logo">
+</header>
+<div class="content">
+    <div class="lan_list">
+        <div class="input_lan">
+            <ul class="u_input">
+                <li>JAVA</li>
+                <li>C++</li>
+                <li><img src="imgs/triangle%20dorp%20down.png" alt=""></li>
+            </ul>
+        </div>
+        <div class="output_lan">
+            <ul class="u_output">
+                <li>PYTHON</li>
+                <li>C++</li>
+                <li><img src="imgs/triangle%20dorp%20down.png" alt=""></li>
+            </ul>
+        </div>
+    </div>
+    <div class="textarea">
+        <div class="input_text">
+            <textarea name="input_textarea" id="input_textarea" cols="30" rows="10"></textarea>
+            <label name="import" class="import">
+                <input type="file" class="file_import">
+                <img src="imgs/back.png" alt="" class="back-import">
+                <img src="imgs/import.png" alt="" class="import-icon">
+            </label>
+        </div>
+        <div class="line"></div>
+        <div class="output_text">
+            <textarea name="output_textarea" id="output_textarea" cols="30" rows="10"></textarea>
+            <label name="export" class="export">
+                <input type="file" class="file_export">
+                <img src="imgs/back.png" alt="" class="back-export">
+                <img src="imgs/export.png" alt="" class="export-icon">
+            </label>
+        </div>
+    </div>
+    <div class="btn">
+        <button>convert</button>
+    </div>
+</div>
+<footer></footer>
+
+    <form action="/upload/list/" method="post" id="form1" enctype="multipart/form-data">
+<!--        {%csrf_token%}-->
+        <div class='lan' name="lan_selections" onchange="updateSelectedValue()">
+            <h1 class="option" data-value="option1">java</h1>
+            <h1 class="option" data-value="option2">c++</h1>
+        </div>
+
+        <input type="hidden" name="selected_option">
+
+        <label class="import">
+            <div class="realImport">import</div>
+            <input type="file" id='import' name="import">
+        </label>
+
+        <label class="export">
+            <div class="realExport">export</div>
+            <input type="file" id='export' name="export">
+        </label>
+    </form>
+
+</body>
+
+</html>
