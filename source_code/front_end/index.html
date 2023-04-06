@@ -1,7 +1,6 @@
 <!--{% load static %}-->
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,18 +15,24 @@
 <div class="content">
     <div class="lan_list">
         <div class="input_lan">
-            <ul class="u_input">
-                <li>JAVA</li>
-                <li>C++</li>
-                <li><img src="imgs/triangle%20dorp%20down.png" alt=""></li>
-            </ul>
+            <form class="input_form" action="">
+                <p class="from_lan">&nbspFrom Language&nbsp</p>
+                <select name="input-select" id="my-select-in">
+                    <option value="option-1">JAVA</option>
+                    <option value="option-2">PYTHON</option>
+                    <option value="option-3">C++</option>
+                </select>
+            </form>
         </div>
         <div class="output_lan">
-            <ul class="u_output">
-                <li>PYTHON</li>
-                <li>C++</li>
-                <li><img src="imgs/triangle%20dorp%20down.png" alt=""></li>
-            </ul>
+            <form class="output_form" action="">
+                <p class="to_lan">&nbspTo Language&nbsp</p>
+                <select name="output-select" id="my-select-out">
+                    <option value="option-1">PYTHON</option>
+                    <option value="option-2">JAVA</option>
+                    <option value="option-3">C++</option>
+                </select>
+            </form>
         </div>
     </div>
     <div class="textarea">
@@ -35,6 +40,7 @@
             <textarea name="input_textarea" id="input_textarea" cols="30" rows="10"></textarea>
             <label name="import" class="import">
                 <input type="file" class="file_import">
+                <p class="im-text">Import</p>
                 <img src="imgs/back.png" alt="" class="back-import">
                 <img src="imgs/import.png" alt="" class="import-icon">
             </label>
@@ -45,6 +51,7 @@
             <label name="export" class="export">
                 <input type="file" class="file_export">
                 <img src="imgs/back.png" alt="" class="back-export">
+                <p class="ex-text">Export</p>
                 <img src="imgs/export.png" alt="" class="export-icon">
             </label>
         </div>
@@ -54,27 +61,6 @@
     </div>
 </div>
 <footer></footer>
-
-    <form action="/upload/list/" method="post" id="form1" enctype="multipart/form-data">
-<!--        {%csrf_token%}-->
-        <div class='lan' name="lan_selections" onchange="updateSelectedValue()">
-            <h1 class="option" data-value="option1">java</h1>
-            <h1 class="option" data-value="option2">c++</h1>
-        </div>
-
-        <input type="hidden" name="selected_option">
-
-        <label class="import">
-            <div class="realImport">import</div>
-            <input type="file" id='import' name="import">
-        </label>
-
-        <label class="export">
-            <div class="realExport">export</div>
-            <input type="file" id='export' name="export">
-        </label>
-    </form>
-
 </body>
 
 </html>
