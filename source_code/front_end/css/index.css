@@ -9,7 +9,7 @@ body {
     background-color:#181914;
 }
 header {
-    height: 150px;
+    height: 120px;
     width: auto;
     display: flex;
     align-items: center;
@@ -32,7 +32,7 @@ header {
 /*.input_lan,.output_lan{*/
 
 /*}*/
-.input_lan form, .output_lan form {
+.input_lan, .output_lan{
     position: relative;
     float: left;
     width: 50%;
@@ -53,7 +53,7 @@ header {
     z-index: 1;
 }
 select {
-    /*appearance: none;*/
+    appearance: none;
     position: absolute;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -73,7 +73,10 @@ select {
     text-indent: 1px;
     text-overflow: '';
 }
-
+select#my-select-out:hover, select#my-select-in:hover {
+    /*border: 3px solid #4cb495;*/
+    box-shadow: 0 0 10px 3px rgba(16, 231, 164, 0.4);
+}
 
 .textarea {
     position: relative;
@@ -104,6 +107,9 @@ textarea {
     width: 100%;
     height: 100%;
 }
+textarea:focus {
+    outline: none;
+}
 
 .back-import, .back-export,.file_import, .file_export {
     position: absolute;
@@ -111,16 +117,18 @@ textarea {
     bottom: 0;
     width: 8%;
     opacity: 15%;
+    z-index: 4;
 }
 .file_import, .file_export {
     visibility: hidden;
+    /*width: 200px;*/
 }
 .im-text, .ex-text {
     position: absolute;
     right: 1.5%;
     bottom: 1%;
     font-size: 20px;
-    color: #7f7f80;
+    color: #767677;
     font-family:"Arial", Helvetica, sans-serif;
 }
 .import-icon, .export-icon {
@@ -130,6 +138,9 @@ textarea {
     width: 3%;
     opacity: 40%;
 }
+.back-import:hover, .back-export:hover {
+    opacity: 30%;
+}
 .btn {
     width: 100%;
     height: 180px;
@@ -137,7 +148,7 @@ textarea {
     align-items: center;
     justify-content: center;
 }
-button {
+#convert-btn {
     border-radius: 20px;
     border: none;
     color: white;
@@ -145,7 +156,20 @@ button {
     letter-spacing: 2px;
     width: 250px;
     height: 100px;
-    background-color: #19aa07;
+    background-color: #018a60;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+}
+#convert-btn:hover {
+    background-position: 100% 0;
+    transition: all .1s ease-in-out;
+}
+#convert-btn:focus {
+    outline: none;
+}
+#convert-btn:hover{
+    background-image: linear-gradient(to bottom, #1baf83, #018955, #0cb27f, #10d79a);
+    box-shadow: 0 4px 15px 0 rgba(24, 192, 147, 0.75);
 }
 footer {
     height: 200px;
