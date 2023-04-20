@@ -1,4 +1,5 @@
 from django.shortcuts import render, HttpResponse
+
 # from app01 import cpp2pyConvert
 # Create your views here.
 def code_converter(request):
@@ -11,6 +12,12 @@ def code_converter(request):
     output_lan = "SUCCESS"
     print("Click convert")
     return render(request, 'index.html',{'input_lan':input_lan, "output_lan": output_lan})
+    # if request.method == 'GET':
+    #     print("Get")
+    # elif request.method == 'POST':
+    #     print("Post")
+    # else:
+    #     print("Nothing")
 
 def upload_list(request):
     if request.method == 'GET':

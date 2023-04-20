@@ -5,6 +5,29 @@ const mySelect_t = document.getElementById("my-select-out");
 let selectedValue_s = mySelect_s.value;
 //get target language selection
 let selectedValue_t = mySelect_t.value;
+
+//convert-btn
+const convertBtn = document.getElementById('convert-btn');
+const csrfToken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
+
+convertBtn.addEventListener('click', () => {
+    const text = input.getValue;
+    const xhttp = new XMLHttpRequest();
+    console.log("Checking clicking")
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            const reply = this.responseText;
+            const responseObject = JSON.parse(reply);
+            output.setValue = responseObject.result;
+        }
+    };
+    xhttp.open("POST", "/codeConverter/", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.setRequestHeader("X-CSRFToken", csrfToken); // include CSRF token in headers
+    xhttp.send(`text=${text}&csrfmiddlewaretoken=${csrfToken}`);
+});
+
+
 function updateValue() {
     const inputLanguage = inputLanguageSelector.value;
     const outputLanguage = outputLanguageSelector.value;
@@ -73,26 +96,7 @@ saveButton.addEventListener("click", () => {
     }
 });
 
-//convert-btn
-const convertBtn = document.getElementById('convert-btn');
-const csrfToken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
 
-convertBtn.addEventListener('click', () => {
-    const text = input.getValue;
-    const xhttp = new XMLHttpRequest();
-    console.log("Checking clicking")
-    xhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            const reply = this.responseText;
-            const responseObject = JSON.parse(reply);
-            output.setValue = responseObject.result;
-        }
-    };
-    xhttp.open("POST", "/codeConverter/", true);
-    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.setRequestHeader("X-CSRFToken", csrfToken); // include CSRF token in headers
-    xhttp.send(`text=${text}&csrfmiddlewaretoken=${csrfToken}`);
-});
 
 function getModeFromLanguage(language) {
     switch (language) {
