@@ -14,6 +14,7 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+print(BASE_DIR)
 
 
 # Quick-start development settings - unsuitable for production
@@ -26,6 +27,7 @@ SECRET_KEY = "django-insecure-1*cz528mz(q*#@-ru6zz(49uxq0o0u7k!&i3z$do*&7s$z92y@
 DEBUG = True
 
 ALLOWED_HOSTS = []
+STATICFILES_DIRS = [BASE_DIR / "app01" / "static"]
 
 
 # Application definition
@@ -55,7 +57,7 @@ ROOT_URLCONF = "code_converter.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR / "backend" / "server" / "app01" / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [

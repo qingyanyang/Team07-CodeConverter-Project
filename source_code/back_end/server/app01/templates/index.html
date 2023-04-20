@@ -1,128 +1,83 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        #form1 {
-            position: relative;
-        }
-        input {
-            width : 45%;
-            height : 700px;     
-        }
-        button {
-            margin-left: 47.5%;
-            color : green;
-        }
-        .import, .export {
-            position:absolute;
-        }
-        
-        .import {
-            top:110px;
-            left:10px;
-        }
-        .export {
-            top:110px;
-            left:550px;
-        }
-        .realImport, .realExport {
-            text-align: center;
-            line-height: 40px;
-            width: 80px;
-            height: 40px;
-            background-color: aqua;
-            border-radius: 10%;
-        }
-        #import, #export {
-            visibility: hidden;
-        }
-        .option.selected {
-            color:red;
-        }
-        h1 {
-            margin-left: 20px;
-            float:left;
-        }
+    <title>Code Converter</title>
+    <link rel="icon" href="../static/imgs/logo_small.png">
+    <link rel="stylesheet" href="../static/css/index.css">
+    <!-- CodeMirror CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/codemirror.min.css" />
 
-        .lan {
-            width: 100%;
-            height: 100px;
-        }
+    <!-- CodeMirror Theme -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/theme/eclipse.min.css" />
+    <!-- CodeMirror Midnight Theme -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/theme/midnight.min.css" />
 
-    </style>
+
+    <!-- CodeMirror JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/codemirror.min.js"></script>
+
+    <!-- CodeMirror Language Modes -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/mode/clike/clike.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/mode/python/python.min.js"></script>
 </head>
 
 <body>
-<div>
-
-    <form action="/upload/list/" method="post" id="form1" enctype="multipart/form-data">
-        {%csrf_token%}
-        <div class = 'lan' name="lan_selections" onchange="updateSelectedValue()">
-            <h1 class="option" data-value="option1">java</h1>
-            <h1 class="option" data-value="option2">c++</h1>
+    <header>
+        <img src="../static/imgs/logo.png" alt="T7 code converter" class="logo">
+    </header>
+    <div class="content">
+        <div class="lan_list">
+            <div class="input_lan">
+                <p class="from_lan">&nbspFrom Language&nbsp</p>
+                <select name="input-select" id="my-select-in" onchange="updateValue()">
+                    <option value="java">JAVA</option>
+                    <option value="py">PYTHON</option>
+                    <option value="cpp">C++</option>
+                </select>
+            </div>
+            <div class="output_lan">
+                <p class="to_lan">&nbspTo Language&nbsp</p>
+                <select name="output-select" id="my-select-out" onchange="updateValue()">
+                    <option value="py">PYTHON</option>
+                    <option value="java">JAVA</option>
+                    <option value="cpp">C++</option>
+                </select>
+            </div>
         </div>
-
-        <input type="hidden" name="selected_option">
-
-        <label class="import">
-            <div class="realImport">import</div>
-            <input type="file" id='import' name="import">
-        </label>
-        
-        <label class="export">
-            <div class="realExport">export</div>
-            <input type="file" id='export' name="export">
-        </label>
-    </form>
-
-    <form action="/codeConverter/" method="post" id="form2">
-        {%csrf_token%}
-        <!-- get input -->
-        <input type="text" class='input' name="input" value="{{check}}">
-        <input type="text" class='output' name="output" value="{{input_lan}}">
-        <button type="submit">convert</button>
-    </form>
-</div>
-<script>
-
-    
-
-    document.getElementById("import").onchange = function () {
-    
-        document.getElementById("form1").submit();
-        
-        let check = document.getElementsByName('input').value;
-        console.log(check);
-
-        if (check == '1') {
-            alert("invalid suffix!");
-        }
-
-    };
-
-    var titleElements = document.getElementsByClassName("option");
-        for (var i = 0; i < titleElements.length; i++) {
-            titleElements[i].onclick = function () {
-
-                for(var i = 0; i < titleElements.length; i++){
-                    titleElements[i].style.color='black';
-                }
-
-                this.style.color='red';
-        
-                document.getElementsByName("selected_option").value = this.value;
-            }
-        }
-</script>
-<!-- <script>
-    let btnI = document.getElementById("import");
-    let btnE = document.getElementById("export");
-    
-</script> -->
+        <div class="textarea">
+            <div class="input_text">
+                {% csrf_token %}
+                <textarea name="input_textarea" id="input_textarea" cols="30" rows="10"></textarea>
+                <label name="import" class="import">
+                    <input type="file" class="file_import">
+                    <p class="im-text">Import</p>
+                    <img src="../static/imgs/back.png" alt="" class="back-import">
+                    <img src="../static/imgs/import.png" alt="" class="import-icon">
+                </label>
+            </div>
+            <div class="line"></div>
+            <div class="output_text">
+                {% csrf_token %}
+                <textarea name="output_textarea" id="output_textarea" cols="30" rows="10" disabled></textarea>
+                <label name="export" class="export">
+                    <img src="../static/imgs/back.png" alt="" class="back-export">
+                    <p class="ex-text">Export</p>
+                    <img src="../static/imgs/export.png" alt="" class="export-icon">
+                </label>
+            </div>
+        </div>
+        <div class="btn">
+            <button id="convert-btn">convert</button>
+        </div>
+    </div>
+    <footer></footer>
+    <script src="../static/js/index.js"></script>
+    <!--<script src="https://cdn.jsdelivr.net/npm/file-saver"></script>-->
 </body>
+
 </html>
