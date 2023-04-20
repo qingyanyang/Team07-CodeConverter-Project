@@ -11,7 +11,7 @@ const convertBtn = document.getElementById('convert-btn');
 const csrfToken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
 
 convertBtn.addEventListener('click', () => {
-    const text = input.getValue;
+    const text = input.getValue();
     const xhttp = new XMLHttpRequest();
     console.log("Checking clicking")
     xhttp.onreadystatechange = function () {

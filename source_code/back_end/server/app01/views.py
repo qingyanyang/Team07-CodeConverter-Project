@@ -6,9 +6,9 @@ def code_converter(request):
     if request.method=='GET':
         print("Get Here!!")
         return render(request, 'index.html')
-    input_lan = request.POST.get("input")
+    input_lan = request.POST.get("text")
     # output_lan = cpp2pyConvert.convert(input_lan)
-    # print(input_lan)
+    print(input_lan)
     output_lan = "SUCCESS"
     print("Click convert")
     return render(request, 'index.html',{'input_lan':input_lan, "output_lan": output_lan})
