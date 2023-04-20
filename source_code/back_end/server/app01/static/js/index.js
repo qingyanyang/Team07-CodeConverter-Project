@@ -78,8 +78,9 @@ const convertBtn = document.getElementById('convert-btn');
 const csrfToken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
 
 convertBtn.addEventListener('click', () => {
-    const text = input.getVvalue;
+    const text = input.getValue;
     const xhttp = new XMLHttpRequest();
+    console.log("Checking clicking")
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             const reply = this.responseText;
@@ -87,7 +88,7 @@ convertBtn.addEventListener('click', () => {
             output.setValue = responseObject.result;
         }
     };
-    xhttp.open("POST", "/test/", true);
+    xhttp.open("POST", "/codeConverter/", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.setRequestHeader("X-CSRFToken", csrfToken); // include CSRF token in headers
     xhttp.send(`text=${text}&csrfmiddlewaretoken=${csrfToken}`);
@@ -125,3 +126,5 @@ const outputCodeMirror = CodeMirror.fromTextArea(outputTextarea, {
     matchBrackets: true,
     readOnly: true, // 设置为只读，因为这是一个输出框
 });
+
+updateValue();

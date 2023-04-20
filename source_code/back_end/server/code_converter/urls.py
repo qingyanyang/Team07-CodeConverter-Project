@@ -23,5 +23,3 @@ urlpatterns = [
     path("codeConverter/",views.code_converter),
     path('upload/list/',views.upload_list)
 ]
-
-urlpatterns += staticfiles_urlpatterns()
