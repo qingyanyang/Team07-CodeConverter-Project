@@ -18,8 +18,9 @@ convertBtn.addEventListener('click', () => {
         if (this.readyState == 4 && this.status == 200) {
             const reply = this.responseText;
             const responseObject = JSON.parse(reply);
-            output.setValue = responseObject.result;
-        }
+            output.setValue(responseObject.result);
+            console.log(output.getValue())
+    }
     };
     xhttp.open("POST", "/codeConverter/", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -51,7 +52,7 @@ const output = CodeMirror.fromTextArea(document.getElementById("output_textarea"
     mode: "text/x-java",
     theme: "midnight",
     //theme: "eclipse",
-    readOnly: true,
+    readOnly: false,
 });
 
 //get file.suffix from local
@@ -128,7 +129,7 @@ const outputCodeMirror = CodeMirror.fromTextArea(outputTextarea, {
     mode: getModeFromLanguage(outputLanguageSelector.value),
     theme: "default",
     matchBrackets: true,
-    readOnly: true, // 设置为只读，因为这是一个输出框
+    readOnly: false, // 设置为只读，因为这是一个输出框
 });
 
 updateValue();

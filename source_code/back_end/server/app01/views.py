@@ -1,4 +1,5 @@
 from django.shortcuts import render, HttpResponse
+from django.http import JsonResponse
 
 # from app01 import cpp2pyConvert
 # Create your views here.
@@ -11,7 +12,8 @@ def code_converter(request):
     print(input_lan)
     output_lan = "SUCCESS"
     print("Click convert")
-    return render(request, 'index.html',{'input_lan':input_lan, "output_lan": output_lan})
+    # return render(request, 'index.html',{'input_lan':input_lan, "output_lan": output_lan})
+    return JsonResponse({'result': output_lan})
     # if request.method == 'GET':
     #     print("Get")
     # elif request.method == 'POST':
