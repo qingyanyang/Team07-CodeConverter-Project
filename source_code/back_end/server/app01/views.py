@@ -5,21 +5,11 @@ from django.http import JsonResponse
 # Create your views here.
 def code_converter(request):
     if request.method=='GET':
-        print("Get Here!!")
         return render(request, 'index.html')
     input_lan = request.POST.get("text")
     # output_lan = cpp2pyConvert.convert(input_lan)
-    print(input_lan)
-    output_lan = "SUCCESS"
     print("Click convert")
-    # return render(request, 'index.html',{'input_lan':input_lan, "output_lan": output_lan})
-    return JsonResponse({'result': output_lan})
-    # if request.method == 'GET':
-    #     print("Get")
-    # elif request.method == 'POST':
-    #     print("Post")
-    # else:
-    #     print("Nothing")
+    return JsonResponse({'result': input_lan})
 
 def upload_list(request):
     if request.method == 'GET':

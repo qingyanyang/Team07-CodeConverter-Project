@@ -52,7 +52,7 @@ const output = CodeMirror.fromTextArea(document.getElementById("output_textarea"
     mode: "text/x-java",
     theme: "midnight",
     //theme: "eclipse",
-    readOnly: false,
+    readOnly: true,
 });
 
 //get file.suffix from local
@@ -129,7 +129,7 @@ const outputCodeMirror = CodeMirror.fromTextArea(outputTextarea, {
     mode: getModeFromLanguage(outputLanguageSelector.value),
     theme: "default",
     matchBrackets: true,
-    readOnly: false, // 设置为只读，因为这是一个输出框
+    readOnly: true, // 设置为只读，因为这是一个输出框
 });
 
 updateValue();
