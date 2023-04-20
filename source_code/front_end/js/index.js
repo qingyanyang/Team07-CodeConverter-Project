@@ -58,7 +58,7 @@ const convertBtn = document.getElementById('convert-btn');
 const csrfToken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
 
 convertBtn.addEventListener('click', () => {
-    const text = input.value;
+    const text = selectedValue_s + "@" + selectedValue_t + "@" + input.value;
     const xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
