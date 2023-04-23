@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Converter</title>
+    <link rel="icon" href="../static/imgs/logo_small.png">
+    <link rel="stylesheet" href="../static/css/index.css">
+    <!-- CodeMirror CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/codemirror.min.css" />
+
+    <!-- CodeMirror Theme -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/theme/eclipse.min.css" />
+    <!-- CodeMirror Midnight Theme -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/theme/midnight.min.css" />
+
+
+    <!-- CodeMirror JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/codemirror.min.js"></script>
+
+    <!-- CodeMirror Language Modes -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/mode/clike/clike.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/mode/python/python.min.js"></script>
+</head>
+
+<body>
+    <header>
+        <img src="../static/imgs/logo.png" alt="T7 code converter" class="logo">
+    </header>
+    <div class="content">
+        <div class="lan_list">
+            <div class="input_lan">
+                <p class="from_lan">&nbspFrom Language&nbsp</p>
+                <select name="input-select" id="my-select-in" onchange="updateValue()">
+                    <option value="java">JAVA</option>
+                    <option value="py">PYTHON</option>
+                    <option value="cpp">C++</option>
+                </select>
+            </div>
+            <div class="output_lan">
+                <p class="to_lan">&nbspTo Language&nbsp</p>
+                <select name="output-select" id="my-select-out" onchange="updateValue()">
+                    <option value="py">PYTHON</option>
+                    <option value="java">JAVA</option>
+                    <option value="cpp">C++</option>
+                </select>
+            </div>
+        </div>
+        <div class="textarea">
+            <div class="input_text">
+                {% csrf_token %}
+                <textarea name="input_textarea" id="input_textarea" cols="30" rows="10"></textarea>
+                <label name="import" class="import">
+                    <input type="file" class="file_import">
+                    <p class="im-text">Import</p>
+                    <img src="../static/imgs/back.png" alt="" class="back-import">
+                    <img src="../static/imgs/import.png" alt="" class="import-icon">
+                </label>
+            </div>
+            <div class="line"></div>
+            <div class="output_text">
+                {% csrf_token %}
+                <textarea name="output_textarea" id="output_textarea" cols="30" rows="10" disabled></textarea>
+                <label name="export" class="export">
+                    <img src="../static/imgs/back.png" alt="" class="back-export">
+                    <p class="ex-text">Export</p>
+                    <img src="../static/imgs/export.png" alt="" class="export-icon">
+                </label>
+            </div>
+        </div>
+        <div class="btn">
+            <button id="convert-btn">convert</button>
+        </div>
+    </div>
+    <footer></footer>
+    <script src="../static/js/index.js"></script>
+    <!--<script src="https://cdn.jsdelivr.net/npm/file-saver"></script>-->
+</body>
+
+</html>
