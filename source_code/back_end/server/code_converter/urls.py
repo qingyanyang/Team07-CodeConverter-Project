@@ -20,5 +20,5 @@ from app01 import views
 urlpatterns = [
     # path("admin/", admin.site.urls),
     path("codeConverter/",views.code_converter),
-    path('upload/list/',views.upload_list)
+    path("test/",views.test),
 ]
