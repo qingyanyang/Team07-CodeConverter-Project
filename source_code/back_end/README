@@ -1,0 +1,14 @@
+# README
+
+## Usage
+
+Make sure you are in the correct path:
+Team07\source_code\back_end\server
+
+Run the following command to start the program:
+python manage.py runserver
+
+You can now access the application in browser by following address:
+http://127.0.0.1:8000/codeConverter/
+
+## Description
