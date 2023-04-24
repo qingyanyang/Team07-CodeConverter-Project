@@ -128,7 +128,7 @@ const outputCodeMirror = CodeMirror.fromTextArea(outputTextarea, {
     mode: getModeFromLanguage(outputLanguageSelector.value),
     theme: "default",
     matchBrackets: true,
-    readOnly: true, // 设置为只读，因为这是一个输出框
+    readOnly: true,
 });
 
 updateValue()
