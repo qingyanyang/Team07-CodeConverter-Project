@@ -39,6 +39,25 @@ function updateValue() {
     outputCodeMirror.setOption("mode", getModeFromLanguage(outputLanguage));
 }
 
+//save functions
+const saveButton = document.querySelector('.export');
+const outTextarea = document.getElementById("output_textarea");
+
+saveButton.addEventListener("click", () => {
+    console.log("Click!")
+    const textToSave = output.getValue();
+    const defaultFileName = "my_file." + selectedValue_t;
+    const filename = prompt("Enter filename:", defaultFileName);
+
+    if (filename !== null) {
+        const blob = new Blob([textToSave], { type: "text/plain" });
+        const link = document.createElement("a");
+        link.download = filename;
+        link.href = window.URL.createObjectURL(blob);
+        link.click();
+    }
+});
+
 
 // Create CodeMirror instances for input and output textareas
 const input = CodeMirror.fromTextArea(document.getElementById("input_textarea"), {
@@ -77,25 +96,6 @@ file.addEventListener("change", (e) => {
 input.addEventListener("change", function () {
     file.value = "";
 })
-
-//save functions
-const saveButton = document.querySelector('.export');
-const outTextarea = document.getElementById("output_textarea");
-
-saveButton.addEventListener("click", () => {
-    const textToSave = outTextarea.value;
-    const defaultFileName = "my_file." + selectedValue_t;
-    const filename = prompt("Enter filename:", defaultFileName);
-
-    if (filename !== null) {
-        const blob = new Blob([textToSave], { type: "text/plain" });
-        const link = document.createElement("a");
-        link.download = filename;
-        link.href = window.URL.createObjectURL(blob);
-        link.click();
-    }
-});
-
 
 
 function getModeFromLanguage(language) {
