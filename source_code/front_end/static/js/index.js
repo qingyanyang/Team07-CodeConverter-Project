@@ -5,6 +5,32 @@ const mySelect_t = document.getElementById("my-select-out");
 let selectedValue_s = mySelect_s.value;
 //get target language selection
 let selectedValue_t = mySelect_t.value;
+
+
+
+//convert-btn
+const convertBtn = document.getElementById('convert-btn');
+const csrfToken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
+
+convertBtn.addEventListener('click', () => {
+    const text = selectedValue_s + "@" + selectedValue_t + "@" + input.getValue();
+    const xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            const reply = this.responseText;
+            const responseObject = JSON.parse(reply);
+            console.log(responseObject.result)
+            output.setValue(responseObject.result);
+            console.log(output.getValue())
+        }
+    };
+    xhttp.open("POST", "/test/", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.setRequestHeader("X-CSRFToken", csrfToken); // include CSRF token in headers
+    xhttp.send(`text=${text}&csrfmiddlewaretoken=${csrfToken}`);
+});
+
+
 function updateValue() {
     const inputLanguage = inputLanguageSelector.value;
     const outputLanguage = outputLanguageSelector.value;
@@ -13,21 +39,18 @@ function updateValue() {
     outputCodeMirror.setOption("mode", getModeFromLanguage(outputLanguage));
 }
 
-// let input = document.querySelector("#input_textarea");
-// let output = document.querySelector("#output_textarea");
+
 // Create CodeMirror instances for input and output textareas
 const input = CodeMirror.fromTextArea(document.getElementById("input_textarea"), {
     lineNumbers: true,
     mode: "text/x-java",
-    theme: "midnight",
-    //theme: "eclipse",
+    theme: "3024-night",
 });
 
 const output = CodeMirror.fromTextArea(document.getElementById("output_textarea"), {
     lineNumbers: true,
     mode: "text/x-java",
-    theme: "midnight",
-    //theme: "eclipse",
+    theme: "3024-night",
     readOnly: true,
 });
 
@@ -73,25 +96,7 @@ saveButton.addEventListener("click", () => {
     }
 });
 
-//convert-btn
-const convertBtn = document.getElementById('convert-btn');
-const csrfToken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
 
-convertBtn.addEventListener('click', () => {
-    const text = input.getVvalue;
-    const xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            const reply = this.responseText;
-            const responseObject = JSON.parse(reply);
-            output.setValue = responseObject.result;
-        }
-    };
-    xhttp.open("POST", "/test/", true);
-    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.setRequestHeader("X-CSRFToken", csrfToken); // include CSRF token in headers
-    xhttp.send(`text=${text}&csrfmiddlewaretoken=${csrfToken}`);
-});
 
 function getModeFromLanguage(language) {
     switch (language) {
@@ -125,3 +130,5 @@ const outputCodeMirror = CodeMirror.fromTextArea(outputTextarea, {
     matchBrackets: true,
     readOnly: true, // 设置为只读，因为这是一个输出框
 });
+
+updateValue()

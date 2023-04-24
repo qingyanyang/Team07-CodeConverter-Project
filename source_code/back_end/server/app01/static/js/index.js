@@ -44,15 +44,13 @@ function updateValue() {
 const input = CodeMirror.fromTextArea(document.getElementById("input_textarea"), {
     lineNumbers: true,
     mode: "text/x-java",
-    theme: "midnight",
-    //theme: "eclipse",
+    theme: "3024-night",
 });
 
 const output = CodeMirror.fromTextArea(document.getElementById("output_textarea"), {
     lineNumbers: true,
     mode: "text/x-java",
-    theme: "midnight",
-    //theme: "eclipse",
+    theme: "3024-night",
     readOnly: true,
 });
 

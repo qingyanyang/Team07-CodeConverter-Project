@@ -12,12 +12,9 @@
     <!-- CodeMirror CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/codemirror.min.css" />
 
-    <!-- CodeMirror Theme -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/theme/eclipse.min.css" />
-    <!-- CodeMirror Midnight Theme -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/theme/midnight.min.css" />
-
-
+    <!-- CodeMirror 3024-Night Theme -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/theme/3024-night.min.css" />
+    
     <!-- CodeMirror JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/codemirror.min.js"></script>
 
@@ -63,7 +60,7 @@
             <div class="line"></div>
             <div class="output_text">
                 {% csrf_token %}
-                <textarea name="output_textarea" id="output_textarea" cols="30" rows="10"></textarea>
+                <textarea name="output_textarea" id="output_textarea" cols="30" rows="10" disabled></textarea>
                 <label name="export" class="export">
                     <img src="../static/imgs/back.png" alt="" class="back-export">
                     <p class="ex-text">Export</p>
@@ -72,7 +69,7 @@
             </div>
         </div>
         <div class="btn">
-            <button id="convert-btn">convert</button>
+            <button id="convert-btn">CONVERT</button>
         </div>
     </div>
     <footer></footer>
