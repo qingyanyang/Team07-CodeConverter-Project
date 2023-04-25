@@ -13,21 +13,30 @@ const convertBtn = document.getElementById('convert-btn');
 const csrfToken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
 
 convertBtn.addEventListener('click', () => {
-    const text = selectedValue_s + "@" + selectedValue_t + "@" + input.getValue();
+
+    let text = {
+        'raw_code': `${input.getValue()}`,
+        'toLanguage': `${selectedValue_t}`
+    }
+
     const xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            const reply = this.responseText;
-            const responseObject = JSON.parse(reply);
-            console.log(responseObject.result)
-            output.setValue(responseObject.result);
-            console.log(output.getValue())
+    xhttp.open("POST", "/codeConverter/api/submit/", true);
+    xhttp.onreadystatechange = () => {
+        if (xhttp.readyState == 4) {
+            if (xhttp.status >= 200 && xhttp.status < 300) {
+                console.log('拿到了')
+                //拿到response
+                //const responseObject = JSON.parse(xhttp.response);
+                //console.log(responseObject.result)
+                output.setValue(xhttp.response);
+                //console.log(output.getValue())
+            }
         }
-    };
-    xhttp.open("POST", "/test/", true);
-    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    }
+    xhttp.setRequestHeader("Content-type", "application/json");
     xhttp.setRequestHeader("X-CSRFToken", csrfToken); // include CSRF token in headers
-    xhttp.send(`text=${text}&csrfmiddlewaretoken=${csrfToken}`);
+    xhttp.send(`text=${JSON.stringify(text)}&csrfmiddlewaretoken=${csrfToken}`);
+    console.log('发送啦');
 });
 
 

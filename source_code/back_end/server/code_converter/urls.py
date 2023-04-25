@@ -28,7 +28,6 @@ urlpatterns = [
     path("codeConverter/",views.code_converter),
     path("codeConverter/api/submit/", views.code_converter_submit),
     path("test/",views.test),
-
 ]
 
 

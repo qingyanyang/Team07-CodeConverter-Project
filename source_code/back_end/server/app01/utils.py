@@ -17,7 +17,7 @@ def solver(raw_code:str, toLangauge:str) -> str:
     openai.api_key = "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" # private API key
     model_engine = "text-davinci-002"  # Specify the model engine to use
 
-    prompt = "convert this code to " + toLangauge + "\n" + raw_code
+    prompt = "convert this code to " + toLangauge + "\n" + raw_code + "\n" + "make it concise"
 
     temperature = 0.5
     max_tokens = 1000 # maximum char length
