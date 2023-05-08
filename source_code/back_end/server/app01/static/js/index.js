@@ -6,7 +6,11 @@ let selectedValue_s = mySelect_s.value;
 //get target language selection
 let selectedValue_t = mySelect_t.value;
 
+function updateValue() {
+    selectedValue_s = mySelect_s.value;
+    selectedValue_t = mySelect_t.value;
 
+}
 
 //convert-btn
 const convertBtn = document.getElementById('convert-btn');
@@ -40,13 +44,7 @@ convertBtn.addEventListener('click', () => {
 });
 
 
-function updateValue() {
-    const inputLanguage = inputLanguageSelector.value;
-    const outputLanguage = outputLanguageSelector.value;
 
-    inputCodeMirror.setOption("mode", getModeFromLanguage(inputLanguage));
-    outputCodeMirror.setOption("mode", getModeFromLanguage(outputLanguage));
-}
 
 //save functions
 const saveButton = document.querySelector('.export');
@@ -89,6 +87,8 @@ file.addEventListener("change", (e) => {
     let file_input = e.target.files[0];
     let file_name = file_input.name;
     let file_suffix = file_name.split(".")[1];
+    console.log(file_suffix)
+    console.log(selectedValue_s)
 
     if (file_suffix === selectedValue_s) {
         let reader = new FileReader();
@@ -140,4 +140,13 @@ const outputCodeMirror = CodeMirror.fromTextArea(outputTextarea, {
     readOnly: true,
 });
 
+function updateValue1() {
+    const inputLanguage = inputLanguageSelector.value;
+    const outputLanguage = outputLanguageSelector.value;
+
+    inputCodeMirror.setOption("mode", getModeFromLanguage(inputLanguage));
+    outputCodeMirror.setOption("mode", getModeFromLanguage(outputLanguage));
+}
+
 updateValue()
+updateValue1()
