@@ -5,56 +5,46 @@ const mySelect_t = document.getElementById("my-select-out");
 let selectedValue_s = mySelect_s.value;
 //get target language selection
 let selectedValue_t = mySelect_t.value;
+//invoked after selection onChange
+function updateValue() {
+    selectedValue_s = mySelect_s.value;
+    selectedValue_t = mySelect_t.value;
+}
 
+//get value of input and output
+let input = document.querySelector("#input_textarea");
+let output = document.querySelector("#output_textarea");
+//get file.suffix from local
+let file = document.querySelector(".file_import");
 
+file.addEventListener("change", (e) => {
+    let file_input = e.target.files[0];
+    if (file_input) {
+        let file_name = file_input.name;
+        let file_suffix = file_name.split(".")[1];
 
-//convert-btn
-const convertBtn = document.getElementById('convert-btn');
-const csrfToken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
-
-convertBtn.addEventListener('click', () => {
-
-    let text = {
-        'raw_code': `${input.getValue()}`,
-        'toLanguage': `${selectedValue_t}`
-    }
-
-    const xhttp = new XMLHttpRequest();
-    xhttp.open("POST", "/codeConverter/api/submit/", true);
-    xhttp.onreadystatechange = () => {
-        if (xhttp.readyState == 4) {
-            if (xhttp.status >= 200 && xhttp.status < 300) {
-                console.log('拿到了')
-                //拿到response
-                //const responseObject = JSON.parse(xhttp.response);
-                //console.log(responseObject.result)
-                output.setValue(xhttp.response);
-                //console.log(output.getValue())
+        if (file_suffix === selectedValue_s) {
+            let reader = new FileReader();
+            reader.readAsText(file_input);
+            reader.onload = function () {
+                input.value = reader.result;
             }
+        } else {
+            alert("not match! Please reselect.");
+            file.value = "";
         }
     }
-    xhttp.setRequestHeader("Content-type", "application/json");
-    xhttp.setRequestHeader("X-CSRFToken", csrfToken); // include CSRF token in headers
-    xhttp.send(`text=${JSON.stringify(text)}&csrfmiddlewaretoken=${csrfToken}`);
-    console.log('发送啦');
-});
-
-
-function updateValue() {
-    const inputLanguage = inputLanguageSelector.value;
-    const outputLanguage = outputLanguageSelector.value;
-
-    inputCodeMirror.setOption("mode", getModeFromLanguage(inputLanguage));
-    outputCodeMirror.setOption("mode", getModeFromLanguage(outputLanguage));
-}
+})
+input.addEventListener("change", function () {
+    file.value = "";
+})
 
 //save functions
 const saveButton = document.querySelector('.export');
 const outTextarea = document.getElementById("output_textarea");
 
 saveButton.addEventListener("click", () => {
-    console.log("Click!")
-    const textToSave = output.getValue();
+    const textToSave = outTextarea.value;
     const defaultFileName = "my_file." + selectedValue_t;
     const filename = prompt("Enter filename:", defaultFileName);
 
@@ -67,77 +57,38 @@ saveButton.addEventListener("click", () => {
     }
 });
 
+//convert-btn
+const convertBtn = document.getElementById('convert-btn');
+const csrfToken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
 
-// Create CodeMirror instances for input and output textareas
-const input = CodeMirror.fromTextArea(document.getElementById("input_textarea"), {
-    lineNumbers: true,
-    mode: "text/x-java",
-    theme: "3024-night",
-});
+convertBtn.addEventListener('click', () => {
+    let text = {
+        'raw_code': input.value,
+        'toLanguage': selectedValue_t
+    }
 
-const output = CodeMirror.fromTextArea(document.getElementById("output_textarea"), {
-    lineNumbers: true,
-    mode: "text/x-java",
-    theme: "3024-night",
-    readOnly: true,
-});
+    console.log('source:',selectedValue_s)
+    console.log('target:', selectedValue_t)
 
-//get file.suffix from local
-let file = document.querySelector(".file_import");
-
-file.addEventListener("change", (e) => {
-    let file_input = e.target.files[0];
-    let file_name = file_input.name;
-    let file_suffix = file_name.split(".")[1];
-
-    if (file_suffix === selectedValue_s) {
-        let reader = new FileReader();
-        reader.readAsText(file_input);
-        reader.onload = function () {
-            //input.value = reader.result;
-            input.setValue(reader.result);  
+    const xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "/codeConverter/api/submit/", true);
+    xhttp.onreadystatechange = () => {
+        if (xhttp.readyState == 4) {
+            if (xhttp.status >= 200 && xhttp.status < 300) {
+                console.log('拿到了')
+                //拿到response
+                //const responseObject = JSON.parse(xhttp.response);
+                //console.log(responseObject.result)
+                output.innerHTML=xhttp.response;
+                //console.log(output.getValue())
+            }
         }
-    } else {
-        alert("not match! Please reselect.");
-        file.value = "";
     }
-})
-input.addEventListener("change", function () {
-    file.value = "";
-})
-
-
-function getModeFromLanguage(language) {
-    switch (language) {
-        case "java":
-            return "text/x-java";
-        case "py":
-            return "python";
-        case "cpp":
-            return "text/x-c++src";
-        default:
-            return "text/x-java";
-    }
-}
-
-const inputTextarea = document.getElementById("input_textarea");
-const outputTextarea = document.getElementById("output_textarea");
-const inputLanguageSelector = document.getElementById("my-select-in");
-const outputLanguageSelector = document.getElementById("my-select-out");
-
-const inputCodeMirror = CodeMirror.fromTextArea(inputTextarea, {
-    lineNumbers: true,
-    mode: getModeFromLanguage(inputLanguageSelector.value),
-    theme: "default",
-    matchBrackets: true,
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.setRequestHeader("X-CSRFToken", csrfToken); // include CSRF token in headers
+    xhttp.send(`text=${JSON.stringify(text)}&csrfmiddlewaretoken=${csrfToken}`);
+    console.log('发送啦');
 });
 
-const outputCodeMirror = CodeMirror.fromTextArea(outputTextarea, {
-    lineNumbers: true,
-    mode: getModeFromLanguage(outputLanguageSelector.value),
-    theme: "default",
-    matchBrackets: true,
-    readOnly: true,
-});
 
-updateValue()
+
