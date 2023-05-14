@@ -1,0 +1,194 @@
+* {
+    margin: 0;
+    padding: 0 ;
+}
+html {
+    font-size: 10px; /* 设置根元素的字体大小为16px */
+}
+
+li {
+    list-style: none;
+}
+body {
+    background-color:#181914;
+}
+header {
+    height: 6em;
+    width: auto;
+    display: flex;
+    align-items: center;
+    /*justify-content: center;*/
+    background-color: #11130f;
+    /*border-bottom: .5px solid gray;*/
+}
+.logo {
+    width: 15%;
+    margin-left: 2.5%;
+}
+.content {
+    height: 78rem;
+    border-bottom: 0.03rem solid #424242;
+}
+.lan_list {
+    height: 11rem;
+    width: auto;
+}
+/*.input_lan,.output_lan{*/
+
+/*}*/
+.input_lan, .output_lan{
+    position: relative;
+    float: left;
+    width: 50%;
+    height: 11rem;
+    font-family:"Arial", Helvetica, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.from_lan, .to_lan {
+    position: absolute;
+    left: 7%;
+    top:18%;
+    font-size: 1.25rem;
+    letter-spacing: 0.15rem;
+    background-color:#181914;
+    color: #7f7f80;
+    z-index: 1;
+}
+select {
+    appearance: none;
+    position: absolute;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    outline: none;
+    padding: 0 1.5rem;
+    border-radius: 1rem;
+    height: 50%;
+    width: 90%;
+    color: white;
+    border: 0.1rem solid gray;
+    background: transparent;
+    background: url(../imgs/triangle_dorp_down.png) no-repeat;
+    background-position: calc(100% - 1.5rem) center;
+    background-size: 2%;
+    font-size: 1.4rem;
+    letter-spacing: .15rem;
+    text-indent: .05rem;
+    text-overflow: '';
+}
+select#my-select-out:hover, select#my-select-in:hover {
+    /*border: 3px solid #4cb495;*/
+    box-shadow: 0 0 .5rem .15rem rgba(16, 231, 164, 0.4);
+}
+
+.textarea {
+    position: relative;
+    height: 55rem;
+    background-color: #282923;
+}
+.line {
+    position: absolute;
+    left: 50%;
+    top:0;
+    width: 0.03rem;
+    height: 100%;
+    border-right: 0.03rem solid gray;
+    z-index: 1;
+}
+
+.input_text ,.output_text {
+    float: left;
+    position: relative;
+    width: 50%;
+    height: 100%;
+}
+textarea {
+    color: white;
+    font-size: 1.5rem;
+    background-color: #282923;
+    border: none;
+    width: 100%;
+    height: 100%;
+}
+textarea:focus {
+    outline: none;
+}
+
+.back-import, .back-export,.file_import, .file_export {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 8%;
+    opacity: 15%;
+    z-index: 4;
+}
+.file_import, .file_export {
+    visibility: hidden;
+    /*width: 200px;*/
+}
+.im-text, .ex-text {
+    position: absolute;
+    right: 1.5%;
+    bottom: 1%;
+    font-size: 1rem;
+    color: #767677;
+    font-family:"Arial", Helvetica, sans-serif;
+}
+.import-icon, .export-icon {
+    position: absolute;
+    right: 2%;
+    bottom: 3.5%;
+    width: 3%;
+    opacity: 40%;
+}
+.back-import:hover, .back-export:hover {
+    opacity: 30%;
+}
+.btn {
+    width: 100%;
+    height: 9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#convert-btn {
+    border-radius: 1rem;
+    border: none;
+    color: white;
+    font-size: 1.8rem;
+    letter-spacing: .1rem;
+    width: 12.5rem;
+    height: 5rem;
+    background-color: #018a60;
+    cursor: pointer;
+    transition: all .5s ease-in-out;
+    font-weight: 550;
+}
+#convert-btn:hover {
+    background-position: 100% 0;
+    transition: all .1s ease-in-out;
+}
+#convert-btn:focus {
+    outline: none;
+}
+#convert-btn:hover{
+    background-image: linear-gradient(to bottom, #1baf83, #018955, #0cb27f, #10d79a);
+    box-shadow: 0 .2rem .75rem 0 rgba(24, 192, 147, 0.75);
+}
+footer {
+    height: 10rem;
+    width: auto;
+    background-color: #181914;
+}
+
+.cm-s-3024-night.CodeMirror{
+    min-height: 55rem;
+    margin-left: 1px;
+    background-color: #424242;
+}
+
+.CodeMirror{
+    font-size: 17px;
+}
+

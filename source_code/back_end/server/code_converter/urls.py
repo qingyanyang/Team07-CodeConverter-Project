@@ -17,8 +17,20 @@ from django.contrib import admin
 from django.urls import path
 from app01 import views
 
+
+"""
+Routing:
+.../codeConverter/             : GET request; display code editor
+.../codeConverter/api/submit/  : POST request; submit infor, return string
+"""
 urlpatterns = [
     # path("admin/", admin.site.urls),
     path("codeConverter/",views.code_converter),
+<<<<<<< HEAD
+=======
+    path("codeConverter/api/submit/", views.code_converter_submit),
+>>>>>>> 5233c49611ce8106afd5b8ec84785ddb988cf76e
     path("test/",views.test),
 ]
+
+

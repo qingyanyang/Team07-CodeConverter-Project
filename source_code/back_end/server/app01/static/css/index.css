@@ -2,6 +2,10 @@
     margin: 0;
     padding: 0 ;
 }
+html {
+    font-size: 10px; /* 设置根元素的字体大小为16px */
+}
+
 li {
     list-style: none;
 }
@@ -10,6 +14,8 @@ body {
 }
 header {
     height: 120px;
+    height: 120px;
+    height: 6em;
     width: auto;
     display: flex;
     align-items: center;
@@ -27,6 +33,11 @@ header {
 }
 .lan_list {
     height: 220px;
+    height: 78rem;
+    border-bottom: 0.03rem solid #424242;
+}
+.lan_list {
+    height: 11rem;
     width: auto;
 }
 /*.input_lan,.output_lan{*/
@@ -37,6 +48,7 @@ header {
     float: left;
     width: 50%;
     height: 220px;
+    height: 11rem;
     font-family:"Arial", Helvetica, sans-serif;
     display: flex;
     align-items: center;
@@ -48,6 +60,8 @@ header {
     top:18%;
     font-size: 25px;
     letter-spacing: 3px;
+    font-size: 1.25rem;
+    letter-spacing: 0.15rem;
     background-color:#181914;
     color: #7f7f80;
     z-index: 1;
@@ -71,16 +85,32 @@ select {
     font-size: 28px;
     letter-spacing: 3px;
     text-indent: 1px;
+    padding: 0 1.5rem;
+    border-radius: 1rem;
+    height: 50%;
+    width: 90%;
+    color: white;
+    border: 0.1rem solid gray;
+    background: transparent;
+    background: url(../imgs/triangle_dorp_down.png) no-repeat;
+    background-position: calc(100% - 1.5rem) center;
+    background-size: 2%;
+    font-size: 1.4rem;
+    letter-spacing: .15rem;
+    text-indent: .05rem;
     text-overflow: '';
 }
 select#my-select-out:hover, select#my-select-in:hover {
     /*border: 3px solid #4cb495;*/
     box-shadow: 0 0 10px 3px rgba(16, 231, 164, 0.4);
+    box-shadow: 0 0 10px 3px rgba(16, 231, 164, 0.4);
+    box-shadow: 0 0 .5rem .15rem rgba(16, 231, 164, 0.4);
 }
 
 .textarea {
     position: relative;
     height: 1160px;
+    height: 55rem;
     background-color: #282923;
 }
 .line {
@@ -90,6 +120,9 @@ select#my-select-out:hover, select#my-select-in:hover {
     width: .5px;
     height: 100%;
     border-right: .5px solid gray;
+    width: 0.03rem;
+    height: 100%;
+    border-right: 0.03rem solid gray;
     z-index: 1;
 }
 
@@ -102,6 +135,7 @@ select#my-select-out:hover, select#my-select-in:hover {
 textarea {
     color: white;
     font-size: 30px;
+    font-size: 1.5rem;
     background-color: #282923;
     border: none;
     width: 100%;
@@ -128,6 +162,8 @@ textarea:focus {
     right: 1.5%;
     bottom: 1%;
     font-size: 20px;
+    font-size: 20px;
+    font-size: 1rem;
     color: #767677;
     font-family:"Arial", Helvetica, sans-serif;
 }
@@ -144,6 +180,7 @@ textarea:focus {
 .btn {
     width: 100%;
     height: 180px;
+    height: 9rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -159,6 +196,17 @@ textarea:focus {
     background-color: #018a60;
     cursor: pointer;
     transition: all .3s ease-in-out;
+    border-radius: 1rem;
+    border: none;
+    color: white;
+    font-size: 1.8rem;
+    letter-spacing: .1rem;
+    width: 12.5rem;
+    height: 5rem;
+    background-color: #018a60;
+    cursor: pointer;
+    transition: all .5s ease-in-out;
+    font-weight: 550;
 }
 #convert-btn:hover {
     background-position: 100% 0;
@@ -173,7 +221,27 @@ textarea:focus {
 }
 footer {
     height: 200px;
+    box-shadow: 0 4px 15px 0 rgba(24, 192, 147, 0.75);
+
+    box-shadow: 0 .2rem .75rem 0 rgba(24, 192, 147, 0.75);
+
+}
+footer {
+    height: 10rem;
+
     width: auto;
     background-color: #181914;
 }
+
+
+.cm-s-3024-night.CodeMirror{
+    min-height: 55rem;
+    margin-left: 1px;
+    background-color: #424242;
+}
+
+.CodeMirror{
+    font-size: 17px;
+}
+
 
