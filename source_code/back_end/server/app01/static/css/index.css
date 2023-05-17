@@ -192,3 +192,14 @@ footer {
     font-size: 17px;
 }
 
+.swal2-container{
+    font-family:"Arial", Helvetica, sans-serif;
+}
+.swal2-popup{
+    color: white;
+}
+
+.swal2-actions .swal2-styled.swal2-confirm{
+    background-color: #018955;
+}
+

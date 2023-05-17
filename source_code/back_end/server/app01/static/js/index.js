@@ -98,7 +98,11 @@ file.addEventListener("change", (e) => {
             input.setValue(reader.result);  
         }
     } else {
-        alert("not match! Please reselect.");
+        Swal.fire({
+            icon: 'error',
+            title: 'File Type Mismatch',
+            text: 'The file type does not match! Please reselect.',
+        });
         file.value = "";
     }
 })
