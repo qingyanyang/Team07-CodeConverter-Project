@@ -12,41 +12,38 @@ function updateValue() {
 
 }
 
-//convert-btn
+/*
+convert-btn function
+*/
 const convertBtn = document.getElementById('convert-btn');
 const csrfToken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
 
 convertBtn.addEventListener('click', () => {
-
+    //data need to send
     let text = {
-        'raw_code': `${input.getValue()}`,
-        'toLanguage': `${selectedValue_t}`
+        raw_code: input.getValue(),
+        toLanguage: selectedValue_t
     }
-
+    //ajax send request
     const xhttp = new XMLHttpRequest();
     xhttp.open("POST", "/codeConverter/api/submit/", true);
     xhttp.onreadystatechange = () => {
         if (xhttp.readyState == 4) {
             if (xhttp.status >= 200 && xhttp.status < 300) {
                 console.log('拿到了')
-                //拿到response
-                //const responseObject = JSON.parse(xhttp.response);
-                //console.log(responseObject.result)
+                //get response
                 output.setValue(xhttp.response);
-                //console.log(output.getValue())
             }
         }
     }
     xhttp.setRequestHeader("Content-type", "application/json");
-    xhttp.setRequestHeader("X-CSRFToken", csrfToken); // include CSRF token in headers
-    xhttp.send(`text=${JSON.stringify(text)}&csrfmiddlewaretoken=${csrfToken}`);
+    xhttp.send(JSON.stringify(text))
     console.log('发送啦');
 });
 
-
-
-
-//save functions
+/*
+file export
+*/
 const saveButton = document.querySelector('.export');
 const outTextarea = document.getElementById("output_textarea");
 
@@ -80,6 +77,9 @@ const output = CodeMirror.fromTextArea(document.getElementById("output_textarea"
     readOnly: true,
 });
 
+/*
+file import
+*/
 //get file.suffix from local
 let file = document.querySelector(".file_import");
 
