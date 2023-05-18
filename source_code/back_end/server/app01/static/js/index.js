@@ -1,4 +1,3 @@
-//import function
 const mySelect_s = document.getElementById("my-select-in");
 const mySelect_t = document.getElementById("my-select-out");
 //get source language selection
@@ -9,8 +8,8 @@ let selectedValue_t = mySelect_t.value;
 function updateValue() {
     selectedValue_s = mySelect_s.value;
     selectedValue_t = mySelect_t.value;
-
 }
+
 
 /*
 convert-btn function
@@ -87,6 +86,25 @@ const output = CodeMirror.fromTextArea(document.getElementById("output_textarea"
     readOnly: true,
 });
 
+
+/*
+word limit function
+ */
+let input_count = document.getElementById('input_count');
+input.on('change', (cm, changeObj) => {
+    let current_value = cm.getValue();
+    let len_input = current_value.length;
+
+    if (len_input > 1000) {
+        alert("Over limited code size! The exceeding part will be discarded!");
+        cm.setValue(current_value.slice(0, 1000));  // Trim the content to the first 1000 characters
+        len_input = 1000;  // Update the length
+        input_count.style.color ="#018955";
+    }
+
+    input_count.innerText = len_input;
+});
+
 /*
 file import
 */
@@ -116,6 +134,7 @@ file.addEventListener("change", (e) => {
         file.value = "";
     }
 })
+
 input.addEventListener("change", function () {
     file.value = "";
 })
@@ -154,6 +173,7 @@ const outputCodeMirror = CodeMirror.fromTextArea(outputTextarea, {
     readOnly: true,
 });
 
+
 function updateValue1() {
     const inputLanguage = inputLanguageSelector.value;
     const outputLanguage = outputLanguageSelector.value;
@@ -161,6 +181,7 @@ function updateValue1() {
     inputCodeMirror.setOption("mode", getModeFromLanguage(inputLanguage));
     outputCodeMirror.setOption("mode", getModeFromLanguage(outputLanguage));
 }
+
 
 updateValue()
 updateValue1()
