@@ -54,15 +54,27 @@ saveButton.addEventListener("click", () => {
     console.log("Click!")
     const textToSave = output.getValue();
     const defaultFileName = "my_file." + selectedValue_t;
-    const filename = prompt("Enter filename:", defaultFileName);
 
-    if (filename !== null) {
-        const blob = new Blob([textToSave], { type: "text/plain" });
-        const link = document.createElement("a");
-        link.download = filename;
-        link.href = window.URL.createObjectURL(blob);
-        link.click();
-    }
+    Swal.fire({
+        title: 'Enter filename',
+        input: 'text',
+        inputValue: defaultFileName,
+        showCancelButton: true,
+        inputValidator: (value) => {
+            if (!value) {
+                return 'You need to write something!'
+            }
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const filename = result.value;
+            const blob = new Blob([textToSave], { type: "text/plain" });
+            const link = document.createElement("a");
+            link.download = filename;
+            link.href = window.URL.createObjectURL(blob);
+            link.click();
+        }
+    });
 });
 
 
