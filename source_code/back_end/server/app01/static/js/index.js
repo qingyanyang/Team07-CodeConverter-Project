@@ -10,13 +10,11 @@ function updateValue() {
     selectedValue_t = mySelect_t.value;
 }
 
-
 /*
 convert-btn function
 */
 const convertBtn = document.getElementById('convert-btn');
 const csrfToken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
-
 
 convertBtn.addEventListener('click', () => {
     if (!input.getValue() || input.getValue().trim().length === 0) {
@@ -32,6 +30,8 @@ convertBtn.addEventListener('click', () => {
             toLanguage: selectedValue_t,
             fromLanguage: selectedValue_s
         }
+        console.log('selectedValue_t', selectedValue_t)
+        console.log('selectedValue_s', selectedValue_s)
         //ajax send request
         const xhttp = new XMLHttpRequest();
         xhttp.open("POST", "/codeConverter/api/submit/", true);
@@ -107,37 +107,15 @@ const output = CodeMirror.fromTextArea(document.getElementById("output_textarea"
     readOnly: true,
 });
 
-
-/*
-word limit function
- */
-let input_count = document.getElementById('input_count');
-input.on('change', (cm, changeObj) => {
-    let current_value = cm.getValue();
-    let len_input = current_value.length;
-
-    if (len_input > 1000) {
-        alert("Over limited code size! The exceeding part will be discarded!");
-        cm.setValue(current_value.slice(0, 1000));  // Trim the content to the first 1000 characters
-        len_input = 1000;  // Update the length
-        input_count.style.color ="#018955";
-    }
-
-    input_count.innerText = len_input;
-});
-
 /*
 file import
 */
 //get file.suffix from local
 let file = document.querySelector(".file_import");
-
 file.addEventListener("change", (e) => {
     let file_input = e.target.files[0];
     let file_name = file_input.name;
     let file_suffix = file_name.split(".")[1];
-    console.log(file_suffix)
-    console.log(selectedValue_s)
 
     if (file_suffix === selectedValue_s) {
         let reader = new FileReader();
@@ -156,10 +134,24 @@ file.addEventListener("change", (e) => {
     }
 })
 
-input.addEventListener("change", function () {
+/*
+word limit function
+ */
+let input_count = document.getElementById('input_count');
+input.on('change', (cm, changeObj) => {
     file.value = "";
-})
+    let current_value = cm.getValue();
+    let len_input = current_value.length;
 
+    if (len_input > 1000) {
+        alert("Over limited code size! The exceeding part will be discarded!");
+        cm.setValue(current_value.slice(0, 1000));  // Trim the content to the first 1000 characters
+        len_input = 1000;  // Update the length
+        input_count.style.color = "#018955";
+    }
+
+    input_count.innerText = len_input;
+});
 
 function getModeFromLanguage(language) {
     switch (language) {
@@ -174,35 +166,13 @@ function getModeFromLanguage(language) {
     }
 }
 
-const inputTextarea = document.getElementById("input_textarea");
-const outputTextarea = document.getElementById("output_textarea");
-const inputLanguageSelector = document.getElementById("my-select-in");
-const outputLanguageSelector = document.getElementById("my-select-out");
+function updateValueCodeMirror() {
+    const inputLanguage = mySelect_s.value;
+    const outputLanguage = mySelect_t.value;
 
-const inputCodeMirror = CodeMirror.fromTextArea(inputTextarea, {
-    lineNumbers: true,
-    mode: getModeFromLanguage(inputLanguageSelector.value),
-    theme: "default",
-    matchBrackets: true,
-});
-
-const outputCodeMirror = CodeMirror.fromTextArea(outputTextarea, {
-    lineNumbers: true,
-    mode: getModeFromLanguage(outputLanguageSelector.value),
-    theme: "default",
-    matchBrackets: true,
-    readOnly: true,
-});
-
-
-function updateValue1() {
-    const inputLanguage = inputLanguageSelector.value;
-    const outputLanguage = outputLanguageSelector.value;
-
-    inputCodeMirror.setOption("mode", getModeFromLanguage(inputLanguage));
-    outputCodeMirror.setOption("mode", getModeFromLanguage(outputLanguage));
+    input.setOption("mode", getModeFromLanguage(inputLanguage));
+    output.setOption("mode", getModeFromLanguage(outputLanguage));
 }
 
-
 updateValue()
-updateValue1()
+updateValueCodeMirror()
