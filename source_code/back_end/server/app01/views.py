@@ -5,7 +5,7 @@ import json
 from urllib.parse import parse_qs
 from urllib.parse import unquote
 
-from app01.utils import solver
+from app01.utils import checker, converter
 
 # from app01 import cpp2pyConvert
 # Create your views here.
@@ -50,14 +50,30 @@ def code_converter_submit(request):
     if request.method == "POST":
         print('收到啦')
         body = request.body
-        #extract json file
+
+        # extract json file
         data_str = body.decode('utf-8')
         data = json.loads(data_str)
-        raw_code = data['raw_code']
 
+        # get input code
+        raw_code = data['raw_code']
         print(raw_code)
+
+        # get target language
         toLanguage = data['toLanguage']
         print("toLanguage",toLanguage)
-        ans = solver(raw_code, toLanguage)
+
+        # get source language
+        fromLanguage = data['fromLanguage']
+        print("fromLanguage",fromLanguage)
+
+        # check if raw_code is fromLanguage
+        ans = checker(raw_code, fromLanguage)
         print(ans)
+        
+        # if it is, convert it and send to front-end
+        # if it is not, send "No" to front-end
+        if str(ans).startswith('Yes'):
+            code_converted = converter(raw_code,toLanguage)
+            return HttpResponse(code_converted)
         return HttpResponse(ans)

@@ -18,27 +18,37 @@ convert-btn function
 const convertBtn = document.getElementById('convert-btn');
 const csrfToken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
 
+
 convertBtn.addEventListener('click', () => {
-    //data need to send
-    let text = {
-        raw_code: input.getValue(),
-        toLanguage: selectedValue_t
-    }
-    //ajax send request
-    const xhttp = new XMLHttpRequest();
-    xhttp.open("POST", "/codeConverter/api/submit/", true);
-    xhttp.onreadystatechange = () => {
-        if (xhttp.readyState == 4) {
-            if (xhttp.status >= 200 && xhttp.status < 300) {
-                console.log('拿到了')
-                //get response
-                output.setValue(xhttp.response);
+    if (!input.getValue() || input.getValue().trim().length === 0){
+        alert('you have not entered any code yet!')
+    }else{
+        //data need to send
+        let text = {
+            raw_code: input.getValue(),
+            toLanguage: selectedValue_t,
+            fromLanguage: selectedValue_s
+        }
+        //ajax send request
+        const xhttp = new XMLHttpRequest();
+        xhttp.open("POST", "/codeConverter/api/submit/", true);
+        xhttp.onreadystatechange = () => {
+            if (xhttp.readyState == 4) {
+                if (xhttp.status >= 200 && xhttp.status < 300) {
+                    console.log('拿到了')
+                    //get response
+                    const res = xhttp.response;
+                    //check if it is 'No'
+                    res.startsWith('No') ?
+                        alert('this is not ' + selectedValue_s)
+                        : output.setValue(xhttp.response);
+                }
             }
         }
+        xhttp.setRequestHeader("Content-type", "application/json");
+        xhttp.send(JSON.stringify(text))
+        console.log('发送啦');
     }
-    xhttp.setRequestHeader("Content-type", "application/json");
-    xhttp.send(JSON.stringify(text))
-    console.log('发送啦');
 });
 
 /*
