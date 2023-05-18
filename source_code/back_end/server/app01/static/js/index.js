@@ -19,9 +19,13 @@ const csrfToken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
 
 
 convertBtn.addEventListener('click', () => {
-    if (!input.getValue() || input.getValue().trim().length === 0){
-        alert('you have not entered any code yet!')
-    }else{
+    if (!input.getValue() || input.getValue().trim().length === 0) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Null Input',
+            text: 'You have not entered any code! ',
+        });
+    } else {
         //data need to send
         let text = {
             raw_code: input.getValue(),
@@ -38,9 +42,14 @@ convertBtn.addEventListener('click', () => {
                     //get response
                     const res = xhttp.response;
                     //check if it is 'No'
-                    res.startsWith('No') ?
-                        alert('this is not ' + selectedValue_s)
-                        : output.setValue(xhttp.response);
+                    if (res.startsWith('No')) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Code Language Mismatch',
+                            text: 'The language you entered is not ' + selectedValue_s,
+                        })
+                    }
+                    else { output.setValue(xhttp.response); }
                 }
             }
         }
@@ -60,15 +69,27 @@ saveButton.addEventListener("click", () => {
     console.log("Click!")
     const textToSave = output.getValue();
     const defaultFileName = "my_file." + selectedValue_t;
-    const filename = prompt("Enter filename:", defaultFileName);
 
-    if (filename !== null) {
-        const blob = new Blob([textToSave], { type: "text/plain" });
-        const link = document.createElement("a");
-        link.download = filename;
-        link.href = window.URL.createObjectURL(blob);
-        link.click();
-    }
+    Swal.fire({
+        title: 'Enter filename',
+        input: 'text',
+        inputValue: defaultFileName,
+        showCancelButton: true,
+        inputValidator: (value) => {
+            if (!value) {
+                return 'You need to write something!'
+            }
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const filename = result.value;
+            const blob = new Blob([textToSave], { type: "text/plain" });
+            const link = document.createElement("a");
+            link.download = filename;
+            link.href = window.URL.createObjectURL(blob);
+            link.click();
+        }
+    });
 });
 
 
@@ -123,7 +144,7 @@ file.addEventListener("change", (e) => {
         reader.readAsText(file_input);
         reader.onload = function () {
             //input.value = reader.result;
-            input.setValue(reader.result);  
+            input.setValue(reader.result);
         }
     } else {
         Swal.fire({

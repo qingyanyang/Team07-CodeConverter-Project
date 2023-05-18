@@ -205,9 +205,12 @@ footer {
 }
 .swal2-popup{
     color: white;
+    text-align: center;
 }
 
 .swal2-actions .swal2-styled.swal2-confirm{
     background-color: #018955;
 }
-
+#swal2-html-container {
+    text-align: center;
+}
