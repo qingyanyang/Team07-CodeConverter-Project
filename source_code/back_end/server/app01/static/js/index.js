@@ -144,7 +144,11 @@ input.on('change', (cm, changeObj) => {
     let len_input = current_value.length;
 
     if (len_input > 1000) {
-        alert("Over limited code size! The exceeding part will be discarded!");
+        Swal.fire({
+            icon: 'warning',
+            title: 'Over The Limit',
+            text: 'Up to 1000 bytes of code can be converted',
+        });
         cm.setValue(current_value.slice(0, 1000));  // Trim the content to the first 1000 characters
         len_input = 1000;  // Update the length
         input_count.style.color = "#018955";
