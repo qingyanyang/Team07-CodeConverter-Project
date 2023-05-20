@@ -20,8 +20,8 @@ convertBtn.addEventListener('click', () => {
     if (!input.getValue() || input.getValue().trim().length === 0) {
         Swal.fire({
             icon: 'error',
-            title: 'Null Input',
-            text: 'You have not entered any code! ',
+            title: 'Empty Input',
+            text: 'No code detected! Enter your code.',
         });
     } else {
         //data need to send
@@ -45,8 +45,8 @@ convertBtn.addEventListener('click', () => {
                     if (res.startsWith('No')) {
                         Swal.fire({
                             icon: 'error',
-                            title: 'Code Language Mismatch',
-                            text: 'The language you entered is not ' + selectedValue_s,
+                            title: 'Language Mismatch',
+                            text: 'Selected ' + selectedValue_s + ' does not match input. Please check.',
                         })
                     }
                     else { output.setValue(xhttp.response); }
@@ -71,13 +71,13 @@ saveButton.addEventListener("click", () => {
     const defaultFileName = "my_file." + selectedValue_t;
 
     Swal.fire({
-        title: 'Enter filename',
+        title: 'Missing Filename',
         input: 'text',
         inputValue: defaultFileName,
         showCancelButton: true,
         inputValidator: (value) => {
             if (!value) {
-                return 'You need to write something!'
+                return 'No filename! Please provide one.'
             }
         }
     }).then((result) => {
@@ -127,8 +127,8 @@ file.addEventListener("change", (e) => {
     } else {
         Swal.fire({
             icon: 'error',
-            title: 'File Type Mismatch',
-            text: 'The file type does not match! Please reselect.',
+            title: 'Type Mismatch',
+            text: 'File type does not match chosen language. Please reselect.',
         });
         file.value = "";
     }
@@ -146,8 +146,8 @@ input.on('change', (cm, changeObj) => {
     if (len_input > 1000) {
         Swal.fire({
             icon: 'warning',
-            title: 'Over The Limit',
-            text: 'Up to 1000 bytes of code can be converted',
+            title: 'Exceeded Limit',
+            text: 'Code exceeds 1000 characters. Please shorten.',
         });
         cm.setValue(current_value.slice(0, 1000));  // Trim the content to the first 1000 characters
         len_input = 1000;  // Update the length
