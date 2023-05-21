@@ -14,7 +14,7 @@ Use openai API to convert code into target coding language
 '''
 # check if raw_code is fromLanguage
 def checker(raw_code:str, fromLanguage: str) -> str:
-    
+    #for developer: replace it ....with...
     openai.api_key = "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" # private API key
     model_engine = "text-davinci-002"  # Specify the model engine to use
 
