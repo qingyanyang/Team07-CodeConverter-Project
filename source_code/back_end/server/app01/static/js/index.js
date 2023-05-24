@@ -70,6 +70,15 @@ saveButton.addEventListener("click", () => {
     const textToSave = output.getValue();
     const defaultFileName = "my_file." + selectedValue_t;
 
+    if (!textToSave) {
+        Swal.fire({
+            title: 'Empty Content',
+            text: 'Unable to export empty content! Please provide valid code.',
+            icon: 'error'
+        });
+        return;
+    }
+
     Swal.fire({
         title: 'Missing Filename',
         input: 'text',
