@@ -1,3 +1,5 @@
+//set a global flag for check over length
+let flag = false;
 const mySelect_s = document.getElementById("my-select-in");
 const mySelect_t = document.getElementById("my-select-out");
 //get source language selection
@@ -23,7 +25,12 @@ convertBtn.addEventListener('click', () => {
             title: 'Empty Input',
             text: 'No code detected! Enter your code.',
         });
-    } else {
+    } else if (input.getValue().length>1000){
+        Swal.fire({
+            icon: 'error',
+            text: 'input should be maximum of 1000 characters!'
+        });
+    }else {
         //data need to send
         let text = {
             raw_code: input.getValue(),
@@ -144,16 +151,12 @@ input.on('change', (cm, changeObj) => {
     let len_input = current_value.length;
 
     if (len_input > 1000) {
-        Swal.fire({
-            icon: 'warning',
-            title: 'Exceeded Limit',
-            text: 'Code exceeds 1000 characters. Please shorten.',
-        });
-        cm.setValue(current_value.slice(0, 1000));  // Trim the content to the first 1000 characters
-        len_input = 1000;  // Update the length
-        input_count.style.color = "#018955";
+        //if the length of code exceed 1000, it turns red
+        //and convert button disabled, give a notice
+        input_count.style.color = "red";
+    }else{
+        input_count.style.color = "white";
     }
-
     input_count.innerText = len_input;
 });
 

@@ -1,0 +1,10 @@
+/* Change the background color of the alert */
+.swal2-popup {
+  background-color: #181914 !important;
+}
+/* Change the button color */
+.swal2-confirm {
+  background-color: #018a60 !important;
+  color: #fff;
+  width: 80px !important;
+}

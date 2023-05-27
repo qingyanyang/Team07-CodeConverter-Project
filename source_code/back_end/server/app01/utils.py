@@ -1,7 +1,5 @@
 import openai
 
-
-
 '''
 *Description:
 Use openai API to convert code into target coding language 
