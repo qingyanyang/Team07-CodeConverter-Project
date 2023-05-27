@@ -17,6 +17,7 @@ const convertBtn = document.getElementById('convert-btn');
 const csrfToken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
 
 convertBtn.addEventListener('click', () => {
+    output.setValue("");
     if (!input.getValue() || input.getValue().trim().length === 0) {
         Swal.fire({
             icon: 'error',
