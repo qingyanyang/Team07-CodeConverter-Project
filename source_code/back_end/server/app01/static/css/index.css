@@ -13,6 +13,8 @@ body {
     background-color:#181914;
 }
 header {
+    height: 120px;
+    height: 120px;
     height: 6em;
     width: auto;
     display: flex;
@@ -26,6 +28,11 @@ header {
     margin-left: 2.5%;
 }
 .content {
+    height: 1560px;
+    border-bottom: .5px solid #424242;
+}
+.lan_list {
+    height: 220px;
     height: 78rem;
     border-bottom: 0.03rem solid #424242;
 }
@@ -40,6 +47,7 @@ header {
     position: relative;
     float: left;
     width: 50%;
+    height: 220px;
     height: 11rem;
     font-family:"Arial", Helvetica, sans-serif;
     display: flex;
@@ -50,6 +58,8 @@ header {
     position: absolute;
     left: 7%;
     top:18%;
+    font-size: 25px;
+    letter-spacing: 3px;
     font-size: 1.25rem;
     letter-spacing: 0.15rem;
     background-color:#181914;
@@ -62,6 +72,19 @@ select {
     -webkit-appearance: none;
     -moz-appearance: none;
     outline: none;
+    padding: 0 30px;
+    border-radius: 20px;
+    height: 50%;
+    width: 90%;
+    color: white;
+    border: 2px solid gray;
+    background: transparent;
+    background: url(../imgs/triangle_dorp_down.png) no-repeat;
+    background-position: calc(100% - 30px) center;
+    background-size: 2%;
+    font-size: 28px;
+    letter-spacing: 3px;
+    text-indent: 1px;
     padding: 0 1.5rem;
     border-radius: 1rem;
     height: 50%;
@@ -79,11 +102,14 @@ select {
 }
 select#my-select-out:hover, select#my-select-in:hover {
     /*border: 3px solid #4cb495;*/
+    box-shadow: 0 0 10px 3px rgba(16, 231, 164, 0.4);
+    box-shadow: 0 0 10px 3px rgba(16, 231, 164, 0.4);
     box-shadow: 0 0 .5rem .15rem rgba(16, 231, 164, 0.4);
 }
 
 .textarea {
     position: relative;
+    height: 1160px;
     height: 55rem;
     background-color: #282923;
 }
@@ -91,6 +117,9 @@ select#my-select-out:hover, select#my-select-in:hover {
     position: absolute;
     left: 50%;
     top:0;
+    width: .5px;
+    height: 100%;
+    border-right: .5px solid gray;
     width: 0.03rem;
     height: 100%;
     border-right: 0.03rem solid gray;
@@ -105,6 +134,7 @@ select#my-select-out:hover, select#my-select-in:hover {
 }
 textarea {
     color: white;
+    font-size: 30px;
     font-size: 1.5rem;
     background-color: #282923;
     border: none;
@@ -131,6 +161,8 @@ textarea:focus {
     position: absolute;
     right: 1.5%;
     bottom: 1%;
+    font-size: 20px;
+    font-size: 20px;
     font-size: 1rem;
     color: #767677;
     font-family:"Arial", Helvetica, sans-serif;
@@ -155,12 +187,23 @@ textarea:focus {
 }
 .btn {
     width: 100%;
+    height: 180px;
     height: 9rem;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 #convert-btn {
+    border-radius: 20px;
+    border: none;
+    color: white;
+    font-size: 45px;
+    letter-spacing: 2px;
+    width: 250px;
+    height: 100px;
+    background-color: #018a60;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
     border-radius: 1rem;
     border: none;
     color: white;
@@ -182,13 +225,22 @@ textarea:focus {
 }
 #convert-btn:hover{
     background-image: linear-gradient(to bottom, #1baf83, #018955, #0cb27f, #10d79a);
+    box-shadow: 0 4px 15px 0 rgba(24, 192, 147, 0.75);
+}
+footer {
+    height: 200px;
+    box-shadow: 0 4px 15px 0 rgba(24, 192, 147, 0.75);
+
     box-shadow: 0 .2rem .75rem 0 rgba(24, 192, 147, 0.75);
+
 }
 footer {
     height: 10rem;
+
     width: auto;
     background-color: #181914;
 }
+
 
 .cm-s-3024-night.CodeMirror{
     min-height: 55rem;
@@ -200,6 +252,7 @@ footer {
     font-size: 17px;
 }
 
+<<<<<<< HEAD
 .swal2-container{
     font-family:"Arial", Helvetica, sans-serif;
 }
@@ -214,3 +267,6 @@ footer {
 #swal2-html-container {
     text-align: center;
 }
+=======
+
+>>>>>>> refs/remotes/origin/feature/front-end/qingyanyang
