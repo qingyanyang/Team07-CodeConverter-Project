@@ -9,6 +9,7 @@
     <title>Code Converter</title>
     <link rel="icon" href="../static/imgs/logo_small.png">
     <link rel="stylesheet" href="../static/css/index.css">
+    <link rel="stylesheet" href="../static/css/alert.css">
     <!-- CodeMirror CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/codemirror.min.css" />
 
@@ -21,6 +22,13 @@
     <!-- CodeMirror Language Modes -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/mode/clike/clike.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/mode/python/python.min.js"></script>
+
+    <!-- SweetAlert2 Dark Theme -->
+    <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
+    
+    <!-- SweetAlert2 JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+
 </head>
 
 <body>
@@ -31,7 +39,7 @@
         <div class="lan_list">
             <div class="input_lan">
                 <p class="from_lan">&nbspFrom Language&nbsp</p>
-                <select name="input-select" id="my-select-in" onchange="updateValue()">
+                <select name="input-select" id="my-select-in" onchange="updateValue()" >
                     <option value="java">JAVA</option>
                     <option value="py">PYTHON</option>
                     <option value="cpp">C++</option>
@@ -68,13 +76,18 @@
                 </label>
             </div>
         </div>
+        <div class="count">
+            <span id="input_count">0</span>
+            <span>/</span>
+            <span id="input_limit">1000</span>
+        </div>
         <div class="btn">
             <button id="convert-btn">CONVERT</button>
         </div>
     </div>
     <footer></footer>
     <script src="../static/js/index.js"></script>
-    <!--<script src="https://cdn.jsdelivr.net/npm/file-saver"></script>-->
+    
 </body>
 
 </html>
