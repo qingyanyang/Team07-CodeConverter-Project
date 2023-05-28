@@ -2,10 +2,8 @@ from django.shortcuts import render, HttpResponse
 # from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
-from urllib.parse import parse_qs
-from urllib.parse import unquote
 
-from app01.utils import checker, converter
+from app01.utils import checker, converter, bugChecker, identifier,comparator,corrector
 
 # from app01 import cpp2pyConvert
 # Create your views here.
@@ -40,7 +38,22 @@ def test(request):
 def convert_text(target,inputCode):
     return inputCode.upper() 
 
+def correct_fromLanguage(request):
+    if request.method == "POST":
+        print('收到需要correct的input')
+        body = request.body
 
+        # extract json file
+        data_str = body.decode('utf-8')
+        data = json.loads(data_str)
+
+        # get input code that need to be corrected
+        raw_code = data['raw_code']
+        print(raw_code)
+
+        #correct it and send it back to front-end
+        corrected_code = corrector(raw_code)
+        return HttpResponse(corrected_code)
 
 """
 Decorator enables to handle POST request
@@ -67,12 +80,23 @@ def code_converter_submit(request):
         fromLanguage = data['fromLanguage']
         print("fromLanguage",fromLanguage)
 
+        isBug = bugChecker(raw_code)
+        print("isBug",isBug)
+        # check bug
+        if str(isBug).startswith('Yes'):
+            # identify language even it has errors
+            identifyLan = identifier(raw_code)
+            print("identifyLan",identifyLan)
+            #Compare to fromLanguage
+            compareLan = comparator(str(identifyLan),fromLanguage)
+            return HttpResponse(compareLan)
+        # no bug
         # check if raw_code is fromLanguage
         ans = checker(raw_code, fromLanguage)
         print(ans)
         
-        # if it is, convert it and send to front-end
-        # if it is not, send "No" to front-end
+        # if yes, convert it and send to front-end
+        # if no, send "No" to front-end
         if str(ans).startswith('Yes'):
             code_converted = converter(raw_code,toLanguage)
             return HttpResponse(code_converted)
