@@ -19,6 +19,7 @@ const convertBtn = document.getElementById('convert-btn');
 const csrfToken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
 
 convertBtn.addEventListener('click', () => {
+    output.setValue("");
     if (!input.getValue() || input.getValue().trim().length === 0) {
         Swal.fire({
             icon: 'error',
@@ -76,6 +77,15 @@ saveButton.addEventListener("click", () => {
     console.log("Click!")
     const textToSave = output.getValue();
     const defaultFileName = "my_file." + selectedValue_t;
+
+    if (!textToSave) {
+        Swal.fire({
+            title: 'Empty Content',
+            text: 'Unable to export empty content! Please provide valid code.',
+            icon: 'error'
+        });
+        return;
+    }
 
     Swal.fire({
         title: 'Missing Filename',
