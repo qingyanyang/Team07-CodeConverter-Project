@@ -74,11 +74,11 @@ def code_converter_submit(request):
 
         # get target language
         toLanguage = data['toLanguage']
-        # print("toLanguage",toLanguage)
+        print("toLanguage",toLanguage)
 
         # get source language
         fromLanguage = data['fromLanguage']
-        # print("fromLanguage",fromLanguage)
+        print("fromLanguage",fromLanguage)
 
         isBug = bugChecker(raw_code)
         print("isBug",isBug)

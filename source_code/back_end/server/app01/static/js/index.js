@@ -1,5 +1,3 @@
-//set a global flag for check over length
-let flag = false;
 const mySelect_s = document.getElementById("my-select-in");
 const mySelect_t = document.getElementById("my-select-out");
 //get source language selection
@@ -10,6 +8,23 @@ let selectedValue_t = mySelect_t.value;
 function updateValue() {
     selectedValue_s = mySelect_s.value;
     selectedValue_t = mySelect_t.value;
+}
+//function to switch suffix into language name
+function switchSuffixToName(suffix){
+    switch (suffix) {
+        case "java":
+            return "Java";
+        case "py":
+            return "Python";
+        case "cpp":
+            return "C++";
+        case "cs":
+            return "C#";
+        case "js":
+            return "Javascript";
+        default:
+            return "Java";
+    }
 }
 // method to send http request
 function sendHttpRequest(url, method, data) {
@@ -52,15 +67,14 @@ convertBtn.addEventListener('click', () => {
         //data need to send
         let text = {
             raw_code: input.getValue(),
-            toLanguage: selectedValue_t,
-            fromLanguage: selectedValue_s
+            toLanguage: switchSuffixToName(selectedValue_t),
+            fromLanguage: switchSuffixToName(selectedValue_s)
         }
-        console.log('selectedValue_t', selectedValue_t)
-        console.log('selectedValue_s', selectedValue_s)
+        console.log('selectedValue_t', switchSuffixToName(selectedValue_t))
+        console.log('selectedValue_s', switchSuffixToName(selectedValue_s))
         //ajax send request
         sendHttpRequest("/codeConverter/api/submit/", "POST", text)
             .then((response) => {
-                console.log("Response:", response);
                 console.log('拿到啦')
                 // Handle the response
                 //get response
@@ -89,7 +103,6 @@ convertBtn.addEventListener('click', () => {
                             }
                             sendHttpRequest("/codeConverter/api/correct/", "POST", textReq)
                                 .then((response) => {
-                                    console.log("Response:", response);
                                     console.log('拿到啦2')
                                     // Handle the response
                                     input.setValue(response);
@@ -231,6 +244,10 @@ function getModeFromLanguage(language) {
             return "python";
         case "cpp":
             return "text/x-c++src";
+        case "cs":
+            return "text/x-csharp";
+        case "js":
+            return "javascript";
         default:
             return "text/x-java";
     }

@@ -32,7 +32,7 @@ def generator(prompt:str)-> str:
 
 # check if raw_code is fromLanguage
 def checker(raw_code:str, fromLanguage: str) -> str:
-    prompt = "is this " +raw_code+ " "+fromLanguage + " code? only reply \'Yes\' or \'No\'"
+    prompt = "is this " +raw_code+ " belongs to"+fromLanguage + " code? only reply \'Yes\' or \'No\'"
     return generator(prompt)
 
 '''
