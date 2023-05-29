@@ -11,7 +11,24 @@ function updateValue() {
     selectedValue_s = mySelect_s.value;
     selectedValue_t = mySelect_t.value;
 }
-
+// method to send http request
+function sendHttpRequest(url, method, data) {
+    return new Promise((resolve, reject) => {
+        const xhttp = new XMLHttpRequest();
+        xhttp.open(method, url, true);
+        xhttp.setRequestHeader("Content-type", "application/json");
+        xhttp.onreadystatechange = () => {
+            if (xhttp.readyState === 4) {
+                if (xhttp.status >= 200 && xhttp.status < 300) {
+                    resolve(xhttp.response);
+                } else {
+                    reject(new Error("Request failed"));
+                }
+            }
+        };
+        xhttp.send(JSON.stringify(data));
+    });
+}
 /*
 convert-btn function
 */
@@ -41,29 +58,65 @@ convertBtn.addEventListener('click', () => {
         console.log('selectedValue_t', selectedValue_t)
         console.log('selectedValue_s', selectedValue_s)
         //ajax send request
-        const xhttp = new XMLHttpRequest();
-        xhttp.open("POST", "/codeConverter/api/submit/", true);
-        xhttp.onreadystatechange = () => {
-            if (xhttp.readyState == 4) {
-                if (xhttp.status >= 200 && xhttp.status < 300) {
-                    console.log('拿到了')
-                    //get response
-                    const res = xhttp.response;
-                    //check if it is 'No'
-                    if (res.startsWith('No')) {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Language Mismatch',
-                            text: 'Selected ' + selectedValue_s + ' does not match input. Please check.',
-                        })
-                    }
-                    else { output.setValue(xhttp.response); }
+        sendHttpRequest("/codeConverter/api/submit/", "POST", text)
+            .then((response) => {
+                console.log("Response:", response);
+                console.log('拿到啦')
+                // Handle the response
+                //get response
+                const res = response;
+                //check if it is 'No'
+                if (res.startsWith('No')) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Language Mismatch',
+                        text: 'Selected ' + selectedValue_s + ' does not match input. Please check.',
+                    })
+                } else if (res.startsWith('Yes')) {
+                    Swal.fire({
+                        title: 'Code Syntax Error',
+                        text: "cannot convert before correcting!\n Do you want AI to correct it?",
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes!',
+                        cancelButtonText: 'No, I\'ll do it'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            //send correct request to server
+                            let textReq = {
+                                raw_code: input.getValue()
+                            }
+                            sendHttpRequest("/codeConverter/api/correct/", "POST", textReq)
+                                .then((response) => {
+                                    console.log("Response:", response);
+                                    console.log('拿到啦2')
+                                    // Handle the response
+                                    input.setValue(response);
+                                })
+                                .catch((error) => {
+                                    console.error("Error:", error);
+                                    // Handle the error
+                                    Swal.fire({
+                                        icon: 'warning',
+                                        title: '500 server lost'
+                                    })
+                                });
+                        }
+                    })
+                } else {
+                    output.setValue(response);
                 }
-            }
-        }
-        xhttp.setRequestHeader("Content-type", "application/json");
-        xhttp.send(JSON.stringify(text))
-        console.log('发送啦');
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+                // Handle the error
+                Swal.fire({
+                    icon: 'warning',
+                    title: '500 server lost'
+                })
+            });
+
     }
 });
 
