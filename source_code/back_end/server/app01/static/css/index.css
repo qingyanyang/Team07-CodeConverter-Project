@@ -1,17 +1,21 @@
 * {
     margin: 0;
-    padding: 0 ;
+    padding: 0;
 }
+
 html {
-    font-size: 10px; /* 设置根元素的字体大小为16px */
+    font-size: 10px;
+    /* 设置根元素的字体大小为16px */
 }
 
 li {
     list-style: none;
 }
+
 body {
-    background-color:#181914;
+    background-color: #181914;
 }
+
 header {
     height: 6em;
     width: auto;
@@ -21,41 +25,47 @@ header {
     background-color: #11130f;
     /*border-bottom: .5px solid gray;*/
 }
+
 .logo {
     width: 15%;
     margin-left: 2.5%;
 }
+
 .content {
     height: 78rem;
     border-bottom: 0.03rem solid #424242;
 }
+
 .lan_list {
     height: 11rem;
     width: auto;
 }
+
 /*.input_lan,.output_lan{*/
 
 /*}*/
-.input_lan, .output_lan{
+.input_lan, .output_lan {
     position: relative;
     float: left;
     width: 50%;
     height: 11rem;
-    font-family:"Arial", Helvetica, sans-serif;
+    font-family: "Arial", Helvetica, sans-serif;
     display: flex;
     align-items: center;
     justify-content: center;
 }
+
 .from_lan, .to_lan {
     position: absolute;
     left: 7%;
-    top:18%;
+    top: 18%;
     font-size: 1.25rem;
     letter-spacing: 0.15rem;
-    background-color:#181914;
+    background-color: #181914;
     color: #7f7f80;
     z-index: 1;
 }
+
 select {
     appearance: none;
     position: absolute;
@@ -77,6 +87,7 @@ select {
     text-indent: .05rem;
     text-overflow: '';
 }
+
 select#my-select-out:hover, select#my-select-in:hover {
     /*border: 3px solid #4cb495;*/
     box-shadow: 0 0 .5rem .15rem rgba(16, 231, 164, 0.4);
@@ -87,22 +98,24 @@ select#my-select-out:hover, select#my-select-in:hover {
     height: 55rem;
     background-color: #282923;
 }
+
 .line {
     position: absolute;
     left: 50%;
-    top:0;
+    top: 0;
     width: 0.03rem;
     height: 100%;
     border-right: 0.03rem solid gray;
     z-index: 1;
 }
 
-.input_text ,.output_text {
+.input_text, .output_text {
     float: left;
     position: relative;
     width: 50%;
     height: 100%;
 }
+
 textarea {
     color: white;
     font-size: 1.5rem;
@@ -111,11 +124,12 @@ textarea {
     width: 100%;
     height: 100%;
 }
+
 textarea:focus {
     outline: none;
 }
 
-.back-import, .back-export,.file_import, .file_export {
+.back-import, .back-export, .file_import, .file_export {
     position: absolute;
     right: 0;
     bottom: 0;
@@ -123,18 +137,21 @@ textarea:focus {
     opacity: 15%;
     z-index: 4;
 }
+
 .file_import, .file_export {
     visibility: hidden;
     /*width: 200px;*/
 }
+
 .im-text, .ex-text {
     position: absolute;
     right: 1.5%;
     bottom: 1%;
     font-size: 1rem;
     color: #767677;
-    font-family:"Arial", Helvetica, sans-serif;
+    font-family: "Arial", Helvetica, sans-serif;
 }
+
 .import-icon, .export-icon {
     position: absolute;
     right: 2%;
@@ -142,17 +159,21 @@ textarea:focus {
     width: 3%;
     opacity: 40%;
 }
+
 .back-import:hover, .back-export:hover {
     opacity: 30%;
 }
+
 .count {
     margin: 5px 20px;
     color: white;
     font-size: 13px;
 }
-#input_limit{
-    color:#018955;
+
+#input_limit {
+    color: #018955;
 }
+
 .btn {
     width: 100%;
     height: 9rem;
@@ -160,6 +181,7 @@ textarea:focus {
     align-items: center;
     justify-content: center;
 }
+
 #convert-btn {
     border-radius: 1rem;
     border: none;
@@ -173,44 +195,54 @@ textarea:focus {
     transition: all .5s ease-in-out;
     font-weight: 550;
 }
+
 #convert-btn:hover {
     background-position: 100% 0;
     transition: all .1s ease-in-out;
 }
+
 #convert-btn:focus {
     outline: none;
 }
-#convert-btn:hover{
+
+#convert-btn:hover {
     background-image: linear-gradient(to bottom, #1baf83, #018955, #0cb27f, #10d79a);
     box-shadow: 0 .2rem .75rem 0 rgba(24, 192, 147, 0.75);
 }
+
 footer {
     height: 10rem;
     width: auto;
     background-color: #181914;
 }
 
-.cm-s-3024-night.CodeMirror{
+.cm-s-3024-night.CodeMirror {
     min-height: 55rem;
     margin-left: 1px;
     background-color: #424242;
 }
 
-.CodeMirror{
+.CodeMirror {
     font-size: 17px;
 }
 
-.swal2-container{
-    font-family:"Arial", Helvetica, sans-serif;
+.swal2-container {
+    font-family: "Arial", Helvetica, sans-serif;
 }
-.swal2-popup{
+
+.swal2-popup {
     color: white;
     text-align: center;
 }
 
-.swal2-actions .swal2-styled.swal2-confirm{
+.swal2-actions .swal2-styled.swal2-confirm {
     background-color: #018a60;
 }
+
 #swal2-html-container {
     text-align: center;
+}
+
+.cm-invalidchar {
+    color: transparent !important;
 }
