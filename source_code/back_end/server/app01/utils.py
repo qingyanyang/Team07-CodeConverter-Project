@@ -16,7 +16,7 @@ def checker(raw_code:str, fromLanguage: str) -> str:
     openai.api_key = "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" # private API key
     model_engine = "text-davinci-002"  # Specify the model engine to use
 
-    prompt = "is this " +raw_code+ " "+fromLanguage + " code? only reply \'Yes\' or \'No\'"
+    prompt =  "is this " + fromLanguage + " code? /n" + raw_code + "\n" + "only reply \'Yes\' or \'No\' and reason"
     print(prompt)
     temperature = 0.5
     max_tokens = 1000 # maximum char length
@@ -46,7 +46,7 @@ def converter(raw_code:str, toLanguage:str) -> str:
     openai.api_key = "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" # private API key
     model_engine = "text-davinci-002"  # Specify the model engine to use
 
-    prompt = "convert this code " +raw_code+ " to "+ toLanguage + "make it concise."
+    prompt = "convert this code\n" + raw_code+ "\n to "+ toLanguage
     print(prompt)
     temperature = 0.5
     max_tokens = 1000 # maximum char length

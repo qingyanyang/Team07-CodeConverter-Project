@@ -48,7 +48,7 @@ Decorator enables to handle POST request
 @csrf_exempt
 def code_converter_submit(request):
     if request.method == "POST":
-        print('收到啦')
+        # print('收到啦')
         body = request.body
 
         # extract json file
@@ -57,15 +57,15 @@ def code_converter_submit(request):
 
         # get input code
         raw_code = data['raw_code']
-        print(raw_code)
+        # print(raw_code)
 
         # get target language
         toLanguage = data['toLanguage']
-        print("toLanguage",toLanguage)
+        # print("toLanguage",toLanguage)
 
         # get source language
         fromLanguage = data['fromLanguage']
-        print("fromLanguage",fromLanguage)
+        # print("fromLanguage",fromLanguage)
 
         # check if raw_code is fromLanguage
         ans = checker(raw_code, fromLanguage)
@@ -75,5 +75,6 @@ def code_converter_submit(request):
         # if it is not, send "No" to front-end
         if str(ans).startswith('Yes'):
             code_converted = converter(raw_code,toLanguage)
+            print(code_converted)
             return HttpResponse(code_converted)
         return HttpResponse(ans)
