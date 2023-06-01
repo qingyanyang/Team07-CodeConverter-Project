@@ -15,6 +15,9 @@ Build management system:
 * in-turn project manager mechanism: PM weekly responsible for weekly tasks organization, agenda minutes records and meeting organization. 
 * advise to build git branches for every team member
 
+Design prototype:
+* make prototype for the project.
+
 Develop assigned code tasks:
 * interface design and implement.
 * implement file import and export functions.
