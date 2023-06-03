@@ -13,7 +13,7 @@ def generator(prompt:str)-> str:
     4. Replace the value of openai.api_key variable with the new API key.
     5. Save the file and ensure the updated API key is used in subsequent API calls.
     """
-    openai.api_key = "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" # private API key
+    openai.api_key = "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" # private API key
     model_engine = "text-davinci-002"  # Specify the model engine to use
     temperature = 0.5
     max_tokens = 1000 # maximum char length

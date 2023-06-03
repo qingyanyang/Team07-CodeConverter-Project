@@ -211,7 +211,7 @@ file.addEventListener("change", (e) => {
         Swal.fire({
             icon: 'error',
             title: 'Type Mismatch',
-            text: 'File type does not match chosen language. Please reselect.',
+            text: 'File type does not match chosen language. \nPlease reselect.',
         });
         file.value = "";
     }
