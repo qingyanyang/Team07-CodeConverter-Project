@@ -60,7 +60,7 @@ convertBtn.addEventListener('click', () => {
     } else if (input.getValue().length>1000){
         Swal.fire({
             icon: 'error',
-            text: 'input should be maximum of 1000 characters!'
+            text: 'Input should be maximum of 1000 characters!'
         });
     }else {
         //data need to send
@@ -83,12 +83,12 @@ convertBtn.addEventListener('click', () => {
                     Swal.fire({
                         icon: 'error',
                         title: 'Language Mismatch',
-                        text: 'Selected ' + switchSuffixToName(selectedValue_s) + ' does not match input. Please check.',
+                        text: 'Input doesn\'t match selected ' + switchSuffixToName(selectedValue_s) +'. Please retry.',
                     })
                 } else if (res.startsWith('Yes')) {
                     Swal.fire({
                         title: 'Code Error',
-                        text: "cannot convert before correcting!\n Do you want AI to correct it?",
+                        text: "Unable to convert before correcting!\n\r Do you want AI to correct it?",
                         showCancelButton: true,
                         confirmButtonColor: '#3085d6',
                         cancelButtonColor: '#d33',
@@ -146,7 +146,7 @@ saveButton.addEventListener("click", () => {
     if (!textToSave) {
         Swal.fire({
             title: 'Empty Content',
-            text: 'Unable to export empty content! Please provide valid code.',
+            text: 'Unable to export empty content! Please retry.',
             icon: 'error'
         });
         return;
