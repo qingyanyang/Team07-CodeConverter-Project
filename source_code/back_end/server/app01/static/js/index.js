@@ -18,10 +18,10 @@ function switchSuffixToName(suffix){
             return "Python";
         case "cpp":
             return "C++";
-        case "cs":
-            return "C#";
-        case "js":
-            return "Javascript";
+        // case "cs":
+        //     return "C#";
+        // case "js":
+        //     return "Javascript";
         default:
             return "Java";
     }
@@ -88,7 +88,7 @@ convertBtn.addEventListener('click', () => {
                     })
                 } else if (res.startsWith('Yes')) {
                     Swal.fire({
-                        title: 'Code Syntax Error',
+                        title: 'Code Error',
                         text: "cannot convert before correcting!\n Do you want AI to correct it?",
                         showCancelButton: true,
                         confirmButtonColor: '#3085d6',
@@ -244,10 +244,10 @@ function getModeFromLanguage(language) {
             return "python";
         case "cpp":
             return "text/x-c++src";
-        case "cs":
-            return "text/x-csharp";
-        case "js":
-            return "javascript";
+        // case "cs":
+        //     return "text/x-csharp";
+        // case "js":
+        //     return "javascript";
         default:
             return "text/x-java";
     }
