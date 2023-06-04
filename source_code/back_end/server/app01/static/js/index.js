@@ -4,7 +4,6 @@ const mySelect_t = document.getElementById("my-select-out");
 let selectedValue_s = mySelect_s.value;
 //get target language selection
 let selectedValue_t = mySelect_t.value;
-
 function updateValue() {
     selectedValue_s = mySelect_s.value;
     selectedValue_t = mySelect_t.value;
@@ -84,7 +83,7 @@ convertBtn.addEventListener('click', () => {
                     Swal.fire({
                         icon: 'error',
                         title: 'Language Mismatch',
-                        text: 'Selected ' + selectedValue_s + ' does not match input. Please check.',
+                        text: 'Selected ' + switchSuffixToName(selectedValue_s) + ' does not match input. Please check.',
                     })
                 } else if (res.startsWith('Yes')) {
                     Swal.fire({
@@ -211,7 +210,7 @@ file.addEventListener("change", (e) => {
         Swal.fire({
             icon: 'error',
             title: 'Type Mismatch',
-            text: 'File type does not match chosen language. Please reselect.',
+            text: 'The file you have chosen is not a '+switchSuffixToName(selectedValue_s)+' file.'+"\n\r"+"Please reselect.",
         });
         file.value = "";
     }

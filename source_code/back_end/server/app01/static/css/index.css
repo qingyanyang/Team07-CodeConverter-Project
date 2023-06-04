@@ -240,8 +240,9 @@ textarea:focus {
     background-color: #018a60;
 }
 
-#swal2-html-container {
+.swal2-container .swal2-html-container {
     text-align: center;
+    font-size: larger;
 }
 
 .cm-invalidchar {
