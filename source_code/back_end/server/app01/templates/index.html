@@ -8,13 +8,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Code Converter</title>
     <link rel="icon" href="../static/imgs/logo_small.png">
+
     <link rel="stylesheet" href="../static/css/index.css">
     <link rel="stylesheet" href="../static/css/alert.css">
+
     <!-- CodeMirror CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/codemirror.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/codemirror.min.css"/>
 
     <!-- CodeMirror 3024-Night Theme -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/theme/3024-night.min.css" />
+
+    <style>
+        cm-invalidchar {color: transparent !important;}
+        cm-s-default cm-error {color: transparent !important;}
+    </style>
     
     <!-- CodeMirror JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/codemirror.min.js"></script>
@@ -29,6 +36,8 @@
     <!-- SweetAlert2 JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
 
+    <link rel="stylesheet" href="../static/css/after_render.css">
+
 </head>
 
 <body>
@@ -41,14 +50,14 @@
                 <p class="from_lan">&nbspFrom Language&nbsp</p>
                 <select name="input-select" id="my-select-in" onchange="updateValue()" >
                     <option value="java">JAVA</option>
-                    <option value="py">PYTHON</option>
+                    <option value="py">PYTHON3</option>
                     <option value="cpp">C++</option>
                 </select>
             </div>
             <div class="output_lan">
                 <p class="to_lan">&nbspTo Language&nbsp</p>
                 <select name="output-select" id="my-select-out" onchange="updateValue()">
-                    <option value="py">PYTHON</option>
+                    <option value="py">PYTHON3</option>
                     <option value="java">JAVA</option>
                     <option value="cpp">C++</option>
                 </select>

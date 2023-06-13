@@ -245,6 +245,3 @@ textarea:focus {
     font-size: larger;
 }
 
-.cm-invalidchar {
-    color: transparent !important;
-}
